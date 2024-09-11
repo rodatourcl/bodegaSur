@@ -22,15 +22,13 @@
         }
 
         /* Estilo del carrusel */
+        .carousel-inner {
+            max-height: 500px; /* Tamaño fijo de altura */
+        }
         .carousel-inner img {
             width: 100%;
-            height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
-        }
-        @media (min-width: 992px) { /* Para pantallas de tamaño mayor a 992px (escritorios) */
-            .carousel-inner img {
-                height: 500px; /* Ajusta la altura según tus necesidades */
-                object-fit: cover; /* Recorta la imagen si es necesario para llenar el contenedor */
-            }
+            height: 100%;
+            object-fit: cover; /* Ajusta las imágenes para llenar el contenedor sin distorsión */
         }
     </style>
 </head>
