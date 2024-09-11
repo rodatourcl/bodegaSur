@@ -1,0 +1,43 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+}
+
+.menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 14px 20px;
+    display: inline-block;
+}
+
+.menu li a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+}
+
+section {
+    padding: 20px;
+    margin: 20px;
+}
