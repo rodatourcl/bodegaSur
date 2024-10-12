@@ -1,0 +1,32 @@
+.social-icons img {
+    width: 35px;  /* Ancho deseado */
+    height: 35px; /* Altura deseada */
+    margin: 10px; /* Espaciado entre íconos */
+    margin-top: 10px; /* Espaciado superior opcional */
+}
+
+
+/* Estilo personalizado del menú */
+nav {
+    background-color: #CB6040;
+    z-index: 1200; /* Asegúrate de que el menú esté por encima de otros elementos */
+    position: sticky; /* Posiciona el menú de forma fija en la parte superior */
+    top: 0; /* Fija el menú justo en el borde superior */
+}
+.nav-link {
+    color: #F2E5BF;
+}
+.nav-link:hover {
+    color: #F2E5BF; /* Color en hover */
+    font-weight: bold; /* Resalta el texto en hover */
+}
+.nav-item {
+    margin-right: 15px; /* Ajusta el valor según el espacio que desees */
+}
+
+.text-uppercase {
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    color: #F2E5BF; /* Cambia el color del texto a blanco */
+    font-family: 'Lato', sans-serif; /* Establece la fuente (opcional) */
+    font-size: 18px; /* Establece el tamaño de la fuente (opcional) */
+}
