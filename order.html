@@ -113,7 +113,7 @@
                 // Obtener la hora del último pedido desde localStorage
                 const lastOrderTime = localStorage.getItem('lastOrderTime');
                 const now = Date.now();  // Hora actual
-                const timeLimit = 5 * 60 * 1000; // 5 minutos en milisegundos
+                const timeLimit = 1 * 60 * 1000; // 1 minutos en milisegundos
 
                 // Verificar si el usuario puede realizar un nuevo pedido
                 if (lastOrderTime && now - lastOrderTime < timeLimit) {
@@ -123,7 +123,7 @@
                     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // Segundos restantes
 
                     // Mostrar el tiempo restante al usuario
-                    alert(`You can only place a new order once every 5 minutes. Time remaining: ${minutes}m ${seconds}s`);
+                    alert(`You can only place a new order once every 1 minute. Time remaining: ${minutes}m ${seconds}s`);
                     return; // Evitar el envío del pedido si no ha pasado el tiempo suficiente
                 }
 
@@ -325,7 +325,7 @@
                 // Validación del tiempo de frecuencia de envíos
                 const lastSubmissionOrder = localStorage.getItem('lastSubmissionOrder');
                 const now = Date.now();
-                const timeLimit = 5 * 60 * 1000; // 5 minutos en milisegundos
+                const timeLimit = 1 * 60 * 1000; // 1 minuto en milisegundos
 
                 if (lastSubmissionOrder && now - lastSubmissionOrder < timeLimit) {
                     // Calcular el tiempo restante
@@ -334,7 +334,7 @@
                     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // Calcular segundos restantes
 
                     // Mostrar el tiempo restante en el alert
-                    alert(`You can only submit the form once every 5 minutes.\nTime remaining: ${minutes}m ${seconds}s`);
+                    alert(`You can only submit the form once every 1 minute.\nTime remaining: ${minutes}m ${seconds}s`);
                     event.preventDefault(); // Detener el envío
                     return; // Detener el envío si no ha pasado el tiempo suficiente
                 } else {
