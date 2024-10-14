@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bodega Sur</title>
+        <!-- Favicon -->
+        <link rel="icon" href="images/Logo.png" type="image/png">
+        <!-- Bootstrap CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+       
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+
+
+        <!-- Incluir el archivo CSS -->
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles1.css">
+        <!-- Incluir el archivo products-details.js -->
+        <script src="js/products.js"></script> 
+        
+    </head>
+    <body>
+        <!-- Carga el header que contine logo, mensaje y menu horizontal -->
+        <div id="header-container"></div>
+        <script src="js/header.js"></script>
+
+        <!-- Carga de la imagen de la cabecera, se ejecuta el js que llama a imagenCabecera.html -->
+        <div id="carousel-container"></div>
+        <script src="js/cargaImagenCabecera.js"></script>
+        
+        <!-- Menú horizontal aquí -->        
+        <div class="container mt-4">
+            <h1 class="text-center">Order Summary</h1>
+            <div class="table-responsive"> <!-- Contenedor para permitir el desplazamiento horizontal -->
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th class="th-style">Product</th>
+                            <th class="th-style">Description</th>
+                            <th class="th-style">Quantity</th>
+                            <th class="th-style">Price</th>
+                            <th class="th-style">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-summary"></tbody>
+                </table>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <!-- Botones alineados en una fila con espacio entre ellos -->
+                <button class="btn btn-order me-2" onclick="location.href='index.html'">Back to Products</button>
+                <button id="send-whatsapp" class="btn btn-order me-2">Send Order via WhatsApp</button>
+                <button id="openPopupButton" class="btn btn-order me-2">Send Order via Form</button>
+            </div>
+            <div id="loadingMessage" class="loading-overlay" style="display: none;">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <a>Sending your order, please wait...</a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Obtener los parámetros de la URL
+            const queryParams = new URLSearchParams(window.location.search);
+            const orderSummaryContainer = document.getElementById('order-summary');
+
+            // Recuperar los productos del localStorage
+            const orderedProducts = JSON.parse(localStorage.getItem('orderedProducts')) || [];
+
+            // Si no hay productos en el carrito, redirige a index.html
+            if (orderedProducts.length === 0) {
+                window.location.href = 'index.html';
+            }
+
+            // Inicializar total acumulado
+            let grandTotal = 0;
+            const storedCurrency = localStorage.getItem('selectedCurrency') || 'priceLocal'; // Obtener la moneda almacenada
+            const currencySymbol = storedCurrency === 'priceEu' ? '€' : 'PLN'; // Determinar el símbolo de la moneda
+
+            // Mostrar los productos ordenados en la tabla
+            orderedProducts.forEach(product => {
+                const totalPrice = product.quantity * parseFloat(product.price); // Calcular el precio total
+                grandTotal += totalPrice; // Sumar al total acumulado
+                const firstImage = product.images && product.images.length > 0 ? product.images[0] : 'placeholder-image-url.jpg'; // Obtener la primera imagen
+
+                const productRow = document.createElement('tr');
+
+                productRow.innerHTML = `
+                    <td class="th-style">
+                        <img src="${firstImage}" alt="${product.title}" class="product-image">
+                    </td>
+                    <td class="th-style">${product.title} - ${product.footer}</p></td> 
+                    <td class="th-style">${product.quantity}</td>
+                    <td class="td-style">${parseFloat(product.price).toFixed(2)} ${currencySymbol}</p></td> <!-- Mostrar precio con la moneda -->
+                    <td class="td-style">${totalPrice.toFixed(2)} ${currencySymbol}</p></td> <!-- Mostrar el total con la moneda -->
+                `;
+                orderSummaryContainer.appendChild(productRow);
+            });
+            
+            // Mostrar el total acumulado
+            const totalRow = document.createElement('tr');
+            totalRow.innerHTML = `
+                <td colspan="4" class="td-style"><strong>Total Order:</strong></td>
+                <td class="td-style"><strong>${grandTotal.toFixed(2)} ${currencySymbol}</strong></td>
+            `;
+            orderSummaryContainer.appendChild(totalRow);
+
+            // Enviar pedido a través de WhatsApp
+            document.getElementById('send-whatsapp').addEventListener('click', function() {
+                // Obtener la hora del último pedido desde localStorage
+                const lastOrderTime = localStorage.getItem('lastOrderTime');
+                const now = Date.now();  // Hora actual
+                const timeLimit = 5 * 60 * 1000; // 5 minutos en milisegundos
+
+                // Verificar si el usuario puede realizar un nuevo pedido
+                if (lastOrderTime && now - lastOrderTime < timeLimit) {
+                    // Calcular el tiempo restante
+                    const timeRemaining = timeLimit - (now - lastOrderTime);
+                    const minutes = Math.floor(timeRemaining / (1000 * 60)); // Minutos restantes
+                    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // Segundos restantes
+
+                    // Mostrar el tiempo restante al usuario
+                    alert(`You can only place a new order once every 10 minutes. Time remaining: ${minutes}m ${seconds}s`);
+                    return; // Evitar el envío del pedido si no ha pasado el tiempo suficiente
+                }
+
+                // Formatear el mensaje de WhatsApp
+                let message = "Hi, I'd like to place an order 👇\n*Order Summary*\nFrom www.bodegasur.com\n\n Order Items\n";
+                
+                orderedProducts.forEach(product => {
+                    message += `* ${product.quantity} X ${parseFloat(product.price).toFixed(2)} ${currencySymbol} - `;
+                    message += `${product.title} - ${product.footer} `;
+                    message += `= ${(product.quantity * product.price).toFixed(2)} ${currencySymbol}\n`;
+                });
+
+                message += `\nTotal Order: ${grandTotal.toFixed(2)} ${currencySymbol}\n\n`;
+                message += `www.bodegasur.com will confirm your order upon receiving the message.\nThank you.🙏🏻`;
+
+                // Codificar el mensaje para la URL
+                const encodedMessage = encodeURIComponent(message);
+                const phoneNumber = "+48451687470"; // Número de teléfono
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+                // Mostrar confirmación de "Pedido enviado"
+                const userConfirmed = confirm("Your order will continue via WhatsApp. Do you want to proceed?");
+
+                // Si el usuario presiona "Aceptar" (true), abrir WhatsApp
+                if (userConfirmed) {
+                    // Abrir WhatsApp en una nueva ventana
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // Guardar la hora del nuevo pedido en localStorage
+                    localStorage.setItem('lastOrderTime', now);
+
+                    // Redirigir a index.html con un parámetro que indica el envío
+                    setTimeout(() => {
+                        window.location.href = 'index.html?orderSent=true';
+                    }, 500); // Esperar 1 segundo antes de redirigir
+                } else {
+                    // Si el usuario presiona "Cancelar", no hacer nada o mostrar mensaje
+                    alert("Order was not sent.");
+                }
+            });
+
+
+        </script>
+            
+        <div class="popup-container" id="popupForm">
+            <div class="popup-content">
+                <span class="close-button">&times;</span>
+                <h1>Order via Form</h1>
+                    
+                <!-- Botones para seleccionar modalidad -->
+                <div class="order-type-buttons">
+                    <button id="deliveryButton" class="button me-2" onclick="showDelivery()">Delivery</button>
+                    <button id="pickupButton" class="button me-2" onclick="showPickup()">Pick up</button>
+                </div>
+        
+                <!-- Mensaje que indica la modalidad seleccionada -->
+                <form id="orderForm">
+                    <a id="orderTypeMessage" style="text-align: center; font-weight: bold; color: #257180; display: block; text-decoration: none;">Por favor selecciona una modalidad</a>
+        
+                    <!-- Nombre (obligatorio en ambos casos) -->
+                    <div class="form-group">
+                        <label class="text-inline" for="name">Name*:</label>
+                        <input class="text-inline" id="name" name="name" maxlength="30" required placeholder="Your name">
+                    </div>
+                    <!-- Número de contacto (obligatorio en ambos casos) -->
+                    <div class="form-group">
+                        <label class="text-inline" for="phoneOrder">Contact number*:</label>
+                        <input class="text-inline" type="tel" id="phoneOrder" name="phoneOrder" required placeholder="Enter contact number">
+                        <input type="hidden" id="fullPhoneOrder" name="fullPhoneOrder" > <!-- Campo oculto para el número completo -->
+                        <span class="text-inline" id="phoneError" style="color: red; display: none;">Please enter a valid phone number.</span> <!-- Mensaje de error -->
+                    </div>
+
+                    <!-- Incluir el archivo que permite solo presionar numeros espacios y guiones en el numero de telefono -->
+                    <script src="js/contactNumber.js"></script>
+                    
+                    <!-- Checkbox para WhatsApp -->
+                    <div class="whatsapp-group">
+                        <input type="checkbox" id="whatsappOrder" name="whatsappOrder" disabled>
+                        <label class="text-inline" for="whatsappOrder">I can receive messages via WhatsApp</label>
+                    </div>
+          
+                   <!-- Dirección (solo para Delivery) -->
+                    <div class="form-group" id="addressField">
+                        <label class="text-inline" for="address" style="display: block;">Address*:</label>
+                        <input class="text-inline" id="address" name="address" maxlength="80" required placeholder="Street / City / Country">
+                    </div>
+
+        
+                    <!-- Instrucciones especiales (opcional en ambos casos) -->
+                    <div class="form-group">
+                        <label class="text-inline" for="specialInstructions">Special instructions(Optional):</label>
+                        <textarea class="text-inline" id="specialInstructions" name="specialInstructions" maxlength="100" placeholder="Any instructions for delivery?"></textarea>
+                        <small class="text-inline" id="charCount">0/100 characters</small>
+                    </div>
+                    
+                    <div class="text-center mt-2">
+                        <button type="submit" id="sendEmail" class="btn-order me-2">Send Order</button>
+                    </div>
+                    <!-- Incluir el archivo construir el numero de telefono completo y validación del telefono y habilita check -->
+                    <script src="js/phone-order.js"></script>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+        <script>
+            (function(){
+                emailjs.init("m3VH-Vn4bJ5ss5fzy"); // Reemplaza con tu User ID de EmailJS
+            })();
+        
+            // Mostrar pop-up
+            document.getElementById('openPopupButton').addEventListener('click', function() {
+                document.getElementById('popupForm').style.display = 'block';
+            });
+        
+            // Cerrar pop-up
+            document.querySelector('.close-button').addEventListener('click', function() {
+                document.getElementById('popupForm').style.display = 'none';
+            });
+        
+            // Función para mostrar campos de Delivery
+            function showDelivery() {
+                document.getElementById('addressField').style.display = 'block'; // Mostrar el campo de dirección
+                document.getElementById('address').setAttribute('required', 'required'); // Hacer la dirección obligatoria
+                document.getElementById('orderTypeMessage').innerText = "You have selected: Delivery"; // Mostrar mensaje de Delivery
+            }
+        
+            // Función para mostrar campos de Pick up
+            function showPickup() {
+                document.getElementById('addressField').style.display = 'none'; // Ocultar el campo de dirección
+                document.getElementById('address').removeAttribute('required'); // Quitar el atributo de requerido
+                document.getElementById('orderTypeMessage').innerText = "You have selected: Pick up"; // Mostrar mensaje de Pick up
+            }
+        
+            // Ejecutar por defecto la selección de Delivery al cargar la página
+            window.onload = function() {
+                showDelivery(); // Selecciona automáticamente Delivery
+                document.getElementById('deliveryButton').classList.add('active'); // Marca el botón de Delivery como activo si es necesario
+            };
+        
+            // Manejar el envío del formulario
+            document.getElementById('orderForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+        
+                // Obtener datos del formulario
+                const typeOrder = document.getElementById('orderTypeMessage').innerText;
+                const name = document.getElementById('name').value;
+                const contactNumber = document.getElementById('fullPhoneOrder').value;
+                const checkWhatsaap = document.getElementById('whatsappOrder').checked;
+                const address = document.getElementById('address').value;
+                const specialInstructions = document.getElementById('specialInstructions').value;
+                const storedCurrency = localStorage.getItem('selectedCurrency') || 'priceLocal'; // Obtener la moneda almacenada
+                const currencySymbol = storedCurrency === 'priceEu' ? '€' : 'PLN'; // Determinar el símbolo de la moneda
+                
+                // Crear el mensaje
+                const orderSummaryText = orderedProducts.map(product => {
+                    const totalPrice = product.quantity * product.price; // Calcular el precio total
+                    return `${product.title} - ${product.footer}\nQuantity: ${product.quantity}\nPrice: ${product.price.toFixed(2)} ${currencySymbol}\nTotal Price: ${totalPrice.toFixed(2)} ${currencySymbol}\n`;
+                }).join('\n');
+        
+                const grandTotalText = `Total Order: ${grandTotal.toFixed(2)} PLN`;
+        
+                // Concatenar el mensaje completo
+                const messageBody = `
+                    Type Order: ${typeOrder}\n
+                    Name: ${name}\n
+                    Contact number: ${contactNumber}\n
+                    Check whatsapp: ${checkWhatsaap ? 'Yes' : 'No'}\n
+                    Address: ${address}\n
+                    Special instructions: ${specialInstructions}\n\n
+                    Order Summary:\n${orderSummaryText}\n${grandTotalText}
+                `;
+        
+                const isValid = phoneInput.isValidNumber(); // Valida el número de teléfono
+        
+                //validacion del numero de telefono
+                if (!isValid) {
+                    //Número inválido. Se evita el envío.");
+                    phoneError.style.display = 'block'; // Mostrar mensaje de error
+                    document.getElementById('loadingMessage').style.display = 'none'; // Ocultar mensaje de carga si hay error
+                   
+                    return; // No se envía el formulario
+                }
+                else {
+                    phoneError.style.display = 'none'; // Ocultar el error si es válido
+                }
+
+                // Validación del tiempo de envío (completar el formulario demasiado rápido)
+                const formCompletionTime = Date.now() - formStartTimeOrder;
+
+                if (formCompletionTime < 5000) { // Si el formulario se completa en menos de 5 segundos
+                    alert('Apparently you are not a human!');
+                    event.preventDefault(); // Detener el envío del formulario
+                    document.getElementById('loadingMessage').style.display = 'none'; // Ocultar el spinner si el formulario es demasiado rápido
+                    return; // Asegurarse de que el código no siga ejecutándose
+                }
+
+
+                // Validación del tiempo de frecuencia de envíos
+                const lastSubmissionOrder = localStorage.getItem('lastSubmissionOrder');
+                const now = Date.now();
+                const timeLimit = 5 * 60 * 1000; // 5 minutos en milisegundos
+
+                if (lastSubmissionOrder && now - lastSubmissionOrder < timeLimit) {
+                    // Calcular el tiempo restante
+                    const timeRemaining = timeLimit - (now - lastSubmissionOrder);
+                    const minutes = Math.floor(timeRemaining / (1000 * 60)); // Calcular minutos restantes
+                    const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // Calcular segundos restantes
+
+                    // Mostrar el tiempo restante en el alert
+                    alert(`You can only submit the form once every 5 minutes.\nTime remaining: ${minutes}m ${seconds}s`);
+                    event.preventDefault(); // Detener el envío
+                    return; // Detener el envío si no ha pasado el tiempo suficiente
+                } else {
+                    // Guardar la hora de este envío
+                    localStorage.setItem('lastSubmissionOrder', now);
+                }
+
+
+                
+
+                 // Si todas las validaciones pasaron, mostrar el mensaje de carga y enviar el correo
+                document.getElementById('loadingMessage').style.display = 'flex'; // Mostrar spinner de carga solo si todo es válido
+
+        
+                // Enviar el correo a sales@bodegasur.com
+                emailjs.send("service_6mcvuyp", "template_ttf9qbc", {
+                    to_email: 'sales@bodegasur.com', // Dirección de correo fijo
+                    order_summary: messageBody // Aquí pasamos el resumen
+                })
+                .then(function(response) {
+                    console.log('Correo enviado exitosamente!', response.status, response.text);
+                    alert("Order successfully sent!");
+                    document.getElementById('loadingMessage').style.display = 'none'; // Ocultar el mensaje de carga tras el éxito
+                    window.location.href = 'index.html?orderSent=true'; // Redirigir a index.html
+                }, function(error) {
+                    console.error('Error al enviar el correo:', error);
+                    document.getElementById('loadingMessage').style.display = 'none'; // Ocultar el mensaje de carga tras el error
+                    alert("Ocurrió un error al enviar el resumen de orden.\n" +
+                    "Código de estado: " + error.status + "\n" +
+                    "Mensaje: " + error.text);
+                });
+        
+                // Cerrar el modal después de enviar
+                document.getElementById('popupForm').style.display = 'none'; // Cerrar el pop-up
+            });
+        </script>
+        
+    </body>
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script src="js/footer.js"></script>
+</html>
