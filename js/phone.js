@@ -52,23 +52,24 @@ document.getElementById('questionForm').addEventListener('submit', function(even
             event.preventDefault(); // Detener el envío
         }
 
-        // Validación del tiempo de frecuencia de envíos (evitar múltiples envíos en 6 horas)
+        // Validación del tiempo de frecuencia de envíos (evitar múltiples envíos en 1 hora)
         const lastSubmission = localStorage.getItem('lastSubmission');
-        const now = Date.now();
-        const timeLimit = 6 * 60 * 60 * 1000; // 6 horas en milisegundos
+        const now = Date.now(); // Hora actual en milisegundos
+        const timeLimit = 1 * 60 * 60 * 1000; // 1 hora en milisegundos (1 hora * 60 minutos * 60 segundos * 1000 ms)
 
+        // Verifica si hubo un envío anterior y si no ha pasado 1 hora desde entonces
         if (lastSubmission && now - lastSubmission < timeLimit) {
-            // Calcular el tiempo restante
+            // Calcular el tiempo restante antes de que el usuario pueda enviar de nuevo
             const timeRemaining = timeLimit - (now - lastSubmission);
-            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
-            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+            const minutes = Math.floor(timeRemaining / (1000 * 60)); // Convertir a minutos
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000); // Convertir los restos en segundos
 
             // Mostrar el tiempo restante en el alert
-            alert(`You can only submit the form once every 6 hours.\nTime remaining: ${hours}h ${minutes}m ${seconds}s`);
-            event.preventDefault(); // Detener el envío
+            alert(`You can only submit the form once every 1 hour.\nTime remaining: ${minutes}m ${seconds}s`);
+            
+            event.preventDefault(); // Detener el envío del formulario
         } else {
-            // Guardar la hora de este envío
+            // Guardar la hora del envío actual en el localStorage
             localStorage.setItem('lastSubmission', now);
         }
 
