@@ -171,3 +171,112 @@ textarea.text-inline {
     width: 100%;
     box-sizing: border-box;
 }
+
+#product-image-details {
+    max-width: 100%;   /* La imagen no ocupará más del 100% del ancho del contenedor */
+    height: auto;      /* Mantiene la proporción original de la imagen */
+    object-fit: contain; /* Hace que la imagen se ajuste al contenedor sin deformarse */
+    margin: 0 auto;    /* Centra la imagen en su contenedor */
+}
+
+#product-footer-container {
+    text-align: left; /* Alinea el contenido (como el <h4>) a la izquierda */
+    margin-bottom: 10px; /* Espacio inferior opcional para separar las imágenes */
+}
+
+#product-footer-container h4 {
+    display: block; /* Asegura que el <h4> esté en su propia línea */
+    margin-bottom: 10px; /* Espacio entre el título y las imágenes */
+}
+
+#product-footer-container .image-container {
+    display: flex;               /* Activa Flexbox solo para las imágenes */
+    justify-content: flex-start;  /* Alinea las imágenes a la izquierda */
+    gap: 10px;                   /* Espacio entre las imágenes */
+    flex-wrap: wrap;             /* Permite que las imágenes se acomoden en una nueva fila si es necesario */
+}
+
+/* Media query para dispositivos móviles (pantallas pequeñas, max-width: 768px) */
+@media (max-width: 768px) {
+    #product-footer-container {
+        text-align: left; /* Centra el texto y el contenido en pantallas pequeñas */
+    }
+    #product-image-details {
+        max-width: 80%;  /* Limita el ancho máximo de la imagen en pantallas pequeñas */
+    }
+
+    #product-footer-container .image-container {
+        justify-content: left; /* Centra las imágenes en pantallas pequeñas */
+    }
+
+    #product-footer-container img {
+        width: 45%;  /* Las imágenes ocuparán un 45% del ancho en pantallas pequeñas */
+        max-width: 100%;  /* No sobrepasarán el ancho del contenedor */
+        height: auto;  /* Mantiene la proporción de las imágenes */
+        object-fit: contain; /* Asegura que las imágenes no se deformen y mantengan sus proporciones */
+        margin-right: 0; /* Elimina el margen entre las imágenes */
+        margin-bottom: 10px; /* Añade un margen inferior entre las imágenes */
+    }
+}
+
+/* Opcional: Si quieres un ajuste aún más fino para dispositivos más pequeños (ej. iPhone SE) */
+@media (max-width: 320px) {
+    #product-footer-container img {
+        width: 90%; /* Hacemos las imágenes un poco más grandes en pantallas más pequeñas */
+    }
+}
+
+/* Estilos para el nivel de picante */
+#spicy-level-container {
+    display: block;  /* Aseguramos que esté visible por defecto */
+}
+#spicy-level-container.hidden {
+    display: none;  /* La clase 'hidden' puede usarse si quieres ocultar */
+}
+#spicy-level {
+    display: flex;
+    justify-content: flex-start; /* Alineación a la izquierda */
+    gap: 5px;
+    margin-top: 10px;
+}
+
+#spicy-level div {
+    background-color: lightgray; /* Color gris */
+    border: 2px solid gray;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.3s; /* Transición suave para el cambio de color */
+}
+
+#spicy-level div.active {
+   
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+
+	/* de Colores rojos representando el nivel de picante */
+    #spicy-level .level-1 { background-color: #E60000; }  /* Muy picante */
+    #spicy-level .level-2 { background-color: #E60000; }
+    #spicy-level .level-3 { background-color: #E60000; }
+    #spicy-level .level-4 { background-color: #E60000; }
+    #spicy-level .level-5 { background-color: #E60000; }
+    #spicy-level .level-6 { background-color: #E60000; }
+    #spicy-level .level-7 { background-color: #E60000; }
+    #spicy-level .level-8 { background-color: #E60000; }
+    #spicy-level .level-9 { background-color: #E60000; }
+    #spicy-level .level-10 { background-color: #E60000; }  /* Muy picante */
+
+/* Los círculos que no están activos tendrán un color gris */
+#spicy-level .level-inactive {
+    background-color: #d3d3d3;  /* Gris */
+}
+
+@media (max-width: 768px) {
+    #spicy-level div {
+        width: 30px;
+        height: 30px;
+    }
+}
+/* Fin Estilos para el nivel de picante */

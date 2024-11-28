@@ -1,4 +1,3 @@
-
 /* Estilo personalizado del menú */
 nav {
     background-color: #CB6040;
@@ -65,8 +64,6 @@ nav {
         margin: 0 auto; /* Centra la imagen horizontalmente */
     }
 }
-
-
 
 /* para el carrusel de la imagenes*/
 
@@ -144,8 +141,7 @@ input::placeholder {
     width: 100%; /* Asegúrate de que el ancho sea 100% */
     overflow-wrap: break-word; /* Asegúrate de que el texto se ajuste correctamente */
     display: flex; /* Usar Flexbox */
-    align-items: center; /* Centrar verticalmente */
-    
+    align-items: center; /* Centrar verticalmente */    
 }
 
 .form-container {
@@ -168,7 +164,6 @@ label {
 }
 
 input, textarea {
-    
     padding: 8px; /* Añadir padding para un mejor aspecto visual */
     border: 1px solid #ccc; /* Añadir borde */
     border-radius: 4px; /* Añadir bordes redondeados */
@@ -181,17 +176,18 @@ textarea {
     resize: vertical; /* Permite que el usuario cambie la altura */
     margin-top: 0; /* Elimina cualquier margen superior adicional */
 }
+
 small {
     margin-top: 5px;
     color: #777;
     font-size: 0.9em;
 }
+
 .whatsapp-group {
     display: flex;
     white-space: nowrap; /* Evita que el texto salte de línea */
     margin-top: 10px;
     margin-bottom: 10px;
-   
 }
 
 .whatsapp-group input[type="checkbox"] {
@@ -218,14 +214,11 @@ small {
     height: auto; /* Mantiene la proporción de la imagen */
 }
 
-
 .card-footer {
     border: 2px solid #ddd; /* Borde gris claro */
     border-top: none; /* Sin borde superior para que se fusione con la sección de texto */
     padding: 10px;
 }
-
-
 
 .text-justify {
     text-align: justify;
@@ -274,7 +267,6 @@ button:hover {
     transform: scale(1.05); /* Aumentar ligeramente el tamaño */
 }
 
-
 .bordered-image {
     border: 2px solid #ddd; /* Borde de color plomo */
     border-radius: 5px;        /* Bordes ligeramente redondeados */
@@ -285,10 +277,13 @@ button:hover {
 }
 
 .social-icons img {
-    width: 35px;  /* Ancho deseado */
-    height: 35px; /* Altura deseada */
-    margin: 10px; /* Espaciado entre íconos */
-    margin-top: 10px; /* Espaciado superior opcional */
+    width: 30px;  /* Ancho deseado */
+    height: 30px; /* Altura deseada */
+    margin-top: 5px; /* Espaciado superior opcional */
+    transition: transform 0.3s; /* Transición para un efecto de hover */
+}
+.social-icons img:hover {
+    transform: scale(1.1); /* Efecto de hover para aumentar el tamaño del icono */
 }
 
 #order-button {
@@ -355,7 +350,6 @@ button:hover {
     background-color: #ccc;
     cursor: not-allowed;
 }
-
 
 .product-images img {
     width: 100%; /* Ajusta el ancho según sea necesario */
@@ -473,11 +467,39 @@ li {
 }
 
 /* Ajustes para dispositivos móviles */
-@media (max-width: 576px) {
+@media (max-width: 400px) {
     .th-style, .td-style {
         text-align: center; /* Centra el texto en pantallas pequeñas */
-        font-size: 14px; /* Reduce ligeramente el tamaño de la fuente */
+        font-size: 10px; /* Reduce ligeramente el tamaño de la fuente */
     }
+
+    .row {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: scroll; /* Activa el desplazamiento horizontal */
+        overflow-y: hidden; /* Evita un scrollbar vertical innecesario */
+        scrollbar-width: thin; /* Para navegadores modernos (Firefox, etc.) */
+        scrollbar-color: #FD8B51 #f1f1f1; /* Colores personalizados */
+    }
+
+    .row::-webkit-scrollbar {
+        height: 8px; /* Altura de la barra en navegadores basados en WebKit */
+        display: block; /* Fuerza a que el scrollbar sea visible */
+    }
+
+    .row::-webkit-scrollbar-thumb {
+        background: #FD8B51; /* Color del scrollbar */
+        border-radius: 4px; /* Bordes redondeados */
+    }
+
+    .row::-webkit-scrollbar-track {
+        background: #f1f1f1; /* Fondo de la pista del scrollbar */
+    }
+
+    .row:hover {
+        scrollbar-color: #555 #e0e0e0; /* Resalta el scrollbar al interactuar */
+    }
+    
 }
 
 #more-info, #more-info2 {
