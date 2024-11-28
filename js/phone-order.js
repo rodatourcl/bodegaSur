@@ -1,9 +1,9 @@
 // Inicialización de intl-tel-input para selección de código de país
 const phoneInputField = document.querySelector("#phoneOrder");
-const whatsappCheckbox = document.getElementById('whatsappOrder');
-const phoneError = document.getElementById('phoneError'); // Mensaje de error
-const charCount = document.getElementById('charCount');
-const messageInput = document.getElementById('specialInstructions');
+const whatsappCheckbox = document.getElementById('whatsappOrder-form');
+const phoneError = document.getElementById('phoneError-form'); // Mensaje de error
+const charCount = document.getElementById('charCount-form');
+const messageInput = document.getElementById('specialInstructions-form');
 
 // para reiniciar el valor del local storage 
 //localStorage.removeItem('lastSubmissionOrder');

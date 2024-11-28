@@ -27,9 +27,11 @@ if (orderSent) {
 }
 
 // Crear el botón de "Ordenar"
+// Obtener el idioma seleccionado desde localStorage
+const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
 const orderButton = document.createElement('button');
 orderButton.id = 'order-button'; 
-orderButton.innerHTML = 'Order';
+orderButton.innerHTML = selectedLanguage === 'es' ? 'Ordenar' : selectedLanguage === 'pl' ? 'Zamówienie' : 'Order';
 orderButton.disabled = true; // Deshabilitado inicialmente
 
 // Asignar la función de clic para el botón "Ordenar"
@@ -68,7 +70,7 @@ document.body.appendChild(orderButton);
 // Crear el botón de "Clean Order"
 const cleanOrderButton = document.createElement('button');
 cleanOrderButton.id = 'clean-order-button'; // Añadir ID para estilos y animaciones
-cleanOrderButton.innerHTML = 'Clean Order';
+cleanOrderButton.innerHTML = selectedLanguage === 'es' ? 'Limpiar Orden' : selectedLanguage === 'pl' ? 'Wyczyść zamówienie' : 'Clean Order';
 cleanOrderButton.disabled = true; // Deshabilitado inicialmente
 
 // Asignar la función de clic para el botón "Clean Order"
@@ -83,7 +85,8 @@ cleanOrderButton.onclick = function() {
             quantityElement.textContent = 0;
         }
     });
-
+    localStorage.removeItem('productQuantities');
+    localStorage.removeItem('orderedProducts');
     // Guardar las cantidades actualizadas en localStorage
     localStorage.setItem('productQuantities', JSON.stringify(productQuantities));
 
@@ -98,12 +101,16 @@ document.body.appendChild(cleanOrderButton);
 
 // Función para habilitar o deshabilitar el botón "Ordenar"
 function updateOrderButtonState() {
+    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    orderButton.innerHTML = selectedLanguage === 'es' ? 'Ordenar' : selectedLanguage === 'pl' ? 'Zamówienie' : 'Order';
+    cleanOrderButton.innerHTML = selectedLanguage === 'es' ? 'Limpiar Orden' : selectedLanguage === 'pl' ? 'Wyczyść zamówienie' : 'Clean Order';
     const hasProductsToOrder = Object.values(productQuantities).some(quantity => quantity > 0);
     orderButton.disabled = !hasProductsToOrder; // Habilitar o deshabilitar el botón
     cleanOrderButton.disabled = !hasProductsToOrder; // Habilitar o deshabilitar el botón
     // Mostrar u ocultar el botón "Ordenar" con animación
     if (hasProductsToOrder) {
         orderButton.classList.add('visible');
+        
     } else {
         orderButton.classList.remove('visible');
     }
@@ -136,13 +143,17 @@ function updatePrices() {
 
 // Función para inicializar los productos
 function initializeProducts() {
-    // Verificar si hay una moneda almacenada en localStorage
+    productCardsContainer.innerHTML = ""; // Vaciar el contenedor de tarjetas
+    // Verificar y aplicar la moneda almacenada en localStorage
     const storedCurrency = localStorage.getItem('selectedCurrency');
     if (storedCurrency) {
         currentCurrency = storedCurrency;
-        document.getElementById('currency').value = currentCurrency; // Actualiza el selector de moneda
+        document.getElementById('currency').value = currentCurrency;
     }
     
+    // Verificar y aplicar el idioma almacenado en localStorage
+    const selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+
     products.forEach(product => {
         const card = document.createElement("div");
         card.className = "col-md-4 mb-4";
@@ -150,6 +161,8 @@ function initializeProducts() {
         // Inicializar el contador de productos para cada tarjeta con el valor almacenado (o 0 si no hay)
         const initialQuantity = productQuantities[product.id] || 0;
         productQuantities[product.id] = initialQuantity;
+
+        // Generar el HTML de la tarjeta de producto
         card.innerHTML = `
             <a href="product-details.html?id=${product.id}" class="text-decoration-none text-reset">
                 <div class="card">
@@ -173,8 +186,8 @@ function initializeProducts() {
                         </div>
                     </div>
                     <div class="card-text-section p-3">
-                        <h4 class="card-title">${product.title}</h4>
-                        <p>${product.desSmall}</p>
+                        <h4 class="card-title">${product.title[selectedLanguage]}</h4>
+                        <p>${product.desSmall[selectedLanguage]}</p>
                         <p id="price-${product.id}"><strong>Price: ${product.price}</strong></p>
 
                         <!-- Contador de productos -->
@@ -186,11 +199,13 @@ function initializeProducts() {
 
                         <!-- Botón de detalles -->
                         <div class="text-center mt-3">
-                            <button type="button" onclick="location.href='product-details.html?id=${product.id}'">Details</button>
+                            <button type="button" onclick="location.href='product-details.html?id=${product.id}'">
+                                ${selectedLanguage === 'es' ? 'Detalles' : selectedLanguage === 'pl' ? 'Szczegóły' : 'Details'}
+                            </button>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted" style=font-family: 'Lato', sans-serif;">${product.footer}</small>
+                        <small class="text-muted" style="font-family: 'Lato', sans-serif;">${product.footer[selectedLanguage]}</small>
                     </div>
                 </div>
             </a>
@@ -199,12 +214,13 @@ function initializeProducts() {
         productCardsContainer.appendChild(card);
     });
 
-     // Después de inicializar los productos, actualiza los precios según la moneda seleccionada
-     updatePrices();
+    // Actualizar precios según la moneda seleccionada
+    updatePrices();
 
     // Actualizar el estado del botón "Ordenar"
     updateOrderButtonState();
 }
+
 
 // Función para actualizar el contador de productos
 function updateQuantity(productId, change) {
@@ -239,6 +255,7 @@ function updateLocalStorageWithProducts() {
 
     localStorage.setItem('orderedProducts', JSON.stringify(orderedProducts)); // Guardar en localStorage
 }
+
 
 // Ejecutar la función al cargar la página
 window.onload = function() {

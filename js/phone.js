@@ -1,4 +1,4 @@
-const messageInput = document.getElementById('message');
+const messageInput = document.getElementById('messageInput');
 const charCount = document.getElementById('charCount');
 const phoneInputField = document.querySelector("#phone");
 const whatsappCheckbox = document.getElementById('whatsapp');
@@ -13,7 +13,18 @@ const phoneInput = window.intlTelInput(phoneInputField, {
 // Contador de caracteres para el mensaje
 messageInput.addEventListener('input', function() {
     const currentLength = messageInput.value.length;
-    charCount.textContent = `${currentLength}/300 characters`;
+    const maxLength = 300;
+
+    // Actualiza el contador de caracteres según el idioma actual
+    if (currentLanguage === 'es') {
+        charCount.textContent = `${currentLength}/${maxLength} caracteres`;
+    } 
+    if(currentLanguage === 'en')  {
+        charCount.textContent = `${currentLength}/${maxLength} characters`;
+    }
+    if(currentLanguage === 'pl')  {
+        charCount.textContent = `${currentLength}/${maxLength} znaków`;
+    }
 });
 
 // Habilitar el checkbox de WhatsApp solo si hay un número válido
