@@ -16,13 +16,17 @@
         <!-- Incluir el archivo CSS -->
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/styles1.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/6.6.6/css/flag-icons.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" ></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" ></script>
+       
     </head>
     <body>
+        
         <!-- Carga el header que contine logo, mensaje y menu horizontal -->
         <div id="header-container"></div>
         <script src="js/header.js" defer></script>
+       
 
 
         <div id="carouselExample" class="carousel slide mt-4 carousel-type" data-bs-ride="carousel" data-bs-interval="10000">
@@ -48,7 +52,7 @@
         </div>
         <!-- Secciones de contenido -->
         <section id="our-products" class="p-4">
-            <h2>Our Products</h2>
+            <h2 id="our-products">Our Products</h2>
             <div class="currency-selector">
                 <label class="text-inline1" for="currency">Choose currency:</label>
                 <select id="currency" onchange="updatePrices()">
@@ -76,16 +80,18 @@
 
         
         <section id="for-restaurants" class="p-4">
-            <h2>For restaurants</h2>
-            <p>Are you a chef, a restaurant manager or a bar owner? Are you looking for new supplies? Seeking new flavors?</p>
+            <h2 id="for-restaurants">For restaurants</h2>
+            <p id="for-restaurants1">Are you a chef, a restaurant manager or a bar owner? Are you looking for new supplies? Seeking new flavors?</p>
             <!-- Botón de envío -->
-            <button type="button" aria-label="Contact us button" onclick="location.href='#contact'">Contact us</button>
+            <button id="contactButton"type="button" aria-label="Contact us button" onclick="location.href='#contact'">Contact us</button>
+           
+
         </section>
         
 
         <section id="about-us" class="p-4">
-            <h2>About us</h2>
-            <p>Hola! It is Joanna and Carlos here—a Polish-Chilean couple that loves good, natural food.</p>
+            <h2 id="about-us">About us</h2>
+            <p id="presentation">Hola! It is Joanna and Carlos here—a Polish-Chilean couple that loves good, natural food.</p>
             
             <!-- Párrafos que se ocultarán inicialmente -->
             <p id="more-info" style="display: none;">
@@ -102,69 +108,70 @@
 
     
         <section id="contact" class="p-4">
-            <h2>Contact</h2>
-            <p>Have questions about our offer? Or maybe you would like to try our products and see if they are a good fit for your place? Whatever the reason, feel free to contact us via the following form or sending us an email at: sales@bodegasur.com whatever is more comfortable for you.</p>
+            <h2 id="contact">Contact</h2>
+            <p id="contact1">Have questions about our offer? Or maybe you would like to try our products and see if they are a good fit for your place? Whatever the reason, feel free to contact us via the following form or sending us an email at: sales@bodegasur.com whatever is more comfortable for you.</p>
             <br>
         
             <!-- Formulario de contacto --> 
             <form id="questionForm" action="https://formspree.io/f/mrbznekr" method="POST" class="form-container">
                 <!-- Nombre -->
                 <div class="form-group">
-                    <label class="text-inline" for="name" >Your name*</label>
+                    <label id="yourName" class="text-inline" for="name" >Your name*</label>
                     <input class="text-inline" type="text" id="name" name="name" maxlength="30" required placeholder="Enter your name">
                 </div>
         
                 <!-- Compañía -->
                 <div class="form-group">
-                    <label class="text-inline" for="company" >Your company</label>
+                    <label id="yourCompany"class="text-inline" for="company" >Your company</label>
                     <input class="text-inline" type="text" id="company" name="company" maxlength="20" placeholder="Enter your company name">
                 </div>
         
                 <!-- Correo electrónico -->
                 <div class="form-group">
-                    <label class="text-inline" for="email">Your email address*</label>
+                    <label id="yourAddress"class="text-inline" for="email">Your email address*</label>
                     <input class="text-inline" type="email" id="email" name="_replyto" maxlength="60" required placeholder="Enter your email address">
                 <!--  <span class="text-inline" id="emailError" style="color: red; display: none;">Please enter a valid email address.</span>-->
                 </div>
         
                 <!-- Número de teléfono -->
                 <div class="form-group">
-                    <label class="text-inline" for="phone">Your phone number</label>
+                    <label id="yourNumber" class="text-inline" for="phone">Your phone number</label>
                     <input class="text-inline" type="tel" id="phone" name="phone" placeholder="Enter a valid phone number">
                     <input type="hidden" id="fullPhone" name="fullPhone"> <!-- Campo oculto para el número completo -->
                     <span class="text-inline" id="phoneErrorForm" style="color: red; display: none;">Please enter a valid phone number.</span> <!-- Mensaje de error -->
                 </div>
                 
                 <!-- Incluir el archivo que permite solo presionar numeros espacios y guiones en el numero de telefono -->
-                <script src="js/caracteres-telefono.js" defer></script>
+                <script src="js/caracteres-telefono.js"></script>
         
                 <!-- Checkbox para WhatsApp -->
                 <div class="whatsapp-group">
                     <input type="checkbox" id="whatsapp" name="whatsapp" disabled>
-                    <label class="text-inline" for="whatsapp">I can receive messages via WhatsApp</label>
+                    <label id="whatssap"class="text-inline" for="whatsapp">I can receive messages via WhatsApp</label>
                 </div>
         
                 <!-- Mensaje -->
                 <div class="form-group">
-                    <label class="text-inline" for="message">Your message*</label>
-                    <textarea class="text-inline" id="message" name="message" maxlength="300" required placeholder="Enter your message"></textarea>
+                    <label id="message" class="text-inline" for="message">Your message*</label>
+                    <textarea class="text-inline" id="messageInput" name="messageInput" maxlength="300" required placeholder="Enter your message"></textarea>
                     <small class="text-inline" id="charCount">0/300 characters</small>
                 </div>
         
                 <!-- Incluir el archivo construir el numero de telefono completo y validación del telefono y habilita check -->
-                <script src="js/phone.js"defer></script>
+                <script src="js/phone.js"></script>
         
                 <!-- Botón de envío -->
                 <div class="text-center mt-5">
-                    <button type="submit" aria-label="Send form">Send</button>
+                    <button id="btnSender" type="submit" aria-label="Send form">Send</button>
                 </div>
             </form>
         
             
         </section>
         
+        <script src="js/main.js" defer ></script>
     </body>
     <!-- Footer -->
     <div id="footer-container"></div>
-    <script src="js/footer.js" defer></script>
+    <script src="js/footer.js"></script>
 </html>

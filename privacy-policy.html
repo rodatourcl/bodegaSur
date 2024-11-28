@@ -22,166 +22,171 @@
     <body>
         <!-- Carga el header que contine logo, mensaje y menu horizontal -->
         <div id="header-container"></div>
-        <script src="js/header.js"></script>
+        <script src="js/header.js" defer></script>
 
         <!-- Carga de la imagen de la cabecera, se ejecuta el js que llama a imagenCabecera.html -->
         <div id="carousel-container"></div>
         <script src="js/cargaImagenCabecera.js"></script>
 
         <div class="container mt-4">
-            <h1 class="text-center">Privacy Policy</h1>
+            <h1 class="text-center" id="privacy-policy-title">Privacy Policy</h1>
             
-            <h4>§ 1</h4>
-            <h4>General provisions</h4>
-            <p>This Policy explains our collection and use of personal data in accordance with the provisions of the Regulation of the European Parliament and of the Council (EU) of April 27, 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data and repealing Directive 95/46/EC (hereinafter referred to as GDPR).</p>
-            <h4>Personal data administrator</h4>
-            <p>Bodega Sur based in Krakow, Poland, which operates the online store Bodega Sur operating at https://bodegasur.com</p>
-            <h4>Data protection inspector</h4>
-            <p>The Data Protection Consultant can be contacted by sending by e-mail to hola@bodegasur.com. The Data Protection Consultant can be contacted on all matters concerning the processing of personal data and the exercise of rights related to data processing.</p>
-            
+            <h4 id="section-1">§ 1</h4>
+            <h4 id="general-provisions">General provisions</h4>
+            <p id="general-provisions-text">This Policy explains our collection and use of personal data in accordance with the provisions of the Regulation of the European Parliament and of the Council (EU) of April 27, 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data and repealing Directive 95/46/EC (hereinafter referred to as GDPR).</p>
 
-            <h4>§ 2</h4>
-            <h4>Rights to be exercised</h4>
-            <p>The possibility of exercising the rights, i.e. the right to request access to personal data, rectification, erasure, restriction of processing, the right to data portability, the right to object to data processing—depends on the legal basis on which the specific processing is based, as well as the purpose and manner of data processing within the limits specified according to Article 15-22 of the GDPR https://uodo.gov.pl/pl/404. The data controller is not obliged to exercise the rights, in every case and to the same extent. A request for the exercise of a right can be submitted to: hola@bodegasur.com</p>
-            <p>The provision of a response to an inquiry is subject to documentation for a period of 3 years in order to document our fulfillment of legal obligations. This period begins when we provide you with a final response.</p>
-            <p>If the processing is carried out on the basis of Article 6(1)(a) or Article 9(2)(a) - consent to the processing of personal data, you have the right to withdraw your consent at any time without affecting the legality of the processing carried out on the basis of consent before its withdrawal.</p>
-            <p>You have the right to lodge a complaint with the supervisory authority in charge of personal data protection in the Member State of residence, place of work or place where the alleged violation was committed. Supervisory authority in Poland:</p>
-            <p>President of the Office for Personal Data Protection</p>
-            <p>Address: Stawki 2, 00-193 Warsaw</p>
-            <p>Phone: 22 860 70 86</p>
-            <p>Authorities of other States:</p>
-            <p>https://uodo.gov.pl/pl/60</p>
+            <h4 id="personal-data-administrator-title">Personal data administrator</h4>
+            <p id="personal-data-administrator-text">Bodega Sur based in Krakow, Poland, which operates the online store Bodega Sur operating at https://bodegasur.com</p>
+
+            <h4 id="data-protection-inspector-title">Data protection inspector</h4>
+            <p id="data-protection-inspector-text">The Data Protection Consultant can be contacted by sending by e-mail to hola@bodegasur.com. The Data Protection Consultant can be contacted on all matters concerning the processing of personal data and the exercise of rights related to data processing.</p>
+                        
+            <h4 id="section-2">§ 2</h4>
+            <h4 id="rights-to-be-exercised-title">Rights to be exercised</h4>
+            <p id="rights-to-be-exercised-text">The possibility of exercising the rights, i.e. the right to request access to personal data, rectification, erasure, restriction of processing, the right to data portability, the right to object to data processing—depends on the legal basis on which the specific processing is based, as well as the purpose and manner of data processing within the limits specified according to Article 15-22 of the GDPR https://uodo.gov.pl/pl/404. The data controller is not obliged to exercise the rights, in every case and to the same extent. A request for the exercise of a right can be submitted to: hola@bodegasur.com</p>
+            <p id="response-period-text">The provision of a response to an inquiry is subject to documentation for a period of 3 years in order to document our fulfillment of legal obligations. This period begins when we provide you with a final response.</p>
+            <p id="withdraw-consent-rights">If the processing is carried out on the basis of Article 6(1)(a) or Article 9(2)(a) - consent to the processing of personal data, you have the right to withdraw your consent at any time without affecting the legality of the processing carried out on the basis of consent before its withdrawal.</p>
+            <p id="complaint-rights-title">You have the right to lodge a complaint with the supervisory authority in charge of personal data protection in the Member State of residence, place of work or place where the alleged violation was committed. Supervisory authority in Poland:</p>
+            <p id="supervisory-authority-title">President of the Office for Personal Data Protection</p>
+            <p id="supervisory-authority-address">Address: Stawki 2, 00-193 Warsaw</p>
+            <p id="supervisory-authority-phone">Phone: 22 860 70 86</p>
+            <p id="other-authorities-title">Authorities of other States:</p>
+            <p id="other-authorities-link">https://uodo.gov.pl/pl/60</p>
 
 
-            <h4>§ 3</h4>
-            <h4>Security of personal data</h4>
-            <p>Bodega Sur applies technical and organizational measures to ensure the protection of personal data processing appropriate to the risks and categories of data, and in particular secures personal data.</p>
-            <p>Only persons authorized to process personal data and obliged to keep such data confidential have access to personal data. Any entities entrusted with the processing of personal data on a contractual basis are obliged to protect them using appropriate security measures and will be obliged not to transfer your data without our consent and knowledge.</p>
-            <p>Bodega Sur shall make every effort to provide all means of physical, technical and organizational protection of personal data against accidental or intentional destruction, accidental loss, alteration, unauthorized disclosure, use or access, in accordance with all applicable laws.</p>
-            
-            <h4>§ 4</h4>
-            <p><b>Information clauses regarding the acquisition of personal data</b></p>
+            <h4 id="section-3">§ 3</h4>
+            <h4 id="security-of-personal-data-title">Security of personal data</h4>
+            <p id="security-of-personal-data-text">Bodega Sur applies technical and organizational measures to ensure the protection of personal data processing appropriate to the risks and categories of data, and in particular secures personal data.</p>
+            <p id="personal-data-access">Only persons authorized to process personal data and obliged to keep such data confidential have access to personal data. Any entities entrusted with the processing of personal data on a contractual basis are obliged to protect them using appropriate security measures and will be obliged not to transfer your data without our consent and knowledge.</p>
+            <p id="personal-data-protection-efforts">Bodega Sur shall make every effort to provide all means of physical, technical and organizational protection of personal data against accidental or intentional destruction, accidental loss, alteration, unauthorized disclosure, use or access, in accordance with all applicable laws.</p>
+
+            <h4 id="section-4">§ 4</h4>
+            <h4 id="information-clauses-title">Information clauses regarding the acquisition of personal data</h4>
             <ol>
-                <li><p><u>Implementation of orders</u></p></li>
+                <li><p><u id="implementation-orders-title">Implementation of orders</u></p></li>
                 <ol type="a">
-                    <li><p>The purposes of processing personal data, and the legal basis for processing</p></li>
-                    <p>Personal data processed on the basis of Article 6(1)(b), (c) - execution and settlement of the contract, issuance of invoices, realization of complaints, and Article 6(1)(f) of the GDPR legal interest of recovery and security of claims.</p>
-                    <li><p>Information on recipients of personal data or categories of recipients</p></li>
-                    <p>Personal data are made available to entities authorized by law, entities with which contracts are signed for entrustment of personal data processing, and other entities in accordance with § 5 Recipients of data.</p>
-                    <li><p>Your rights</p></li>
-                    <p>You have the right to access your data, the right to rectification of personal data, the right to erasure of data—after archiving deadlines, restriction of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
-                    <li><p>Information about the obligation to provide data and the consequences of not providing them</p></li>
-                    <p>Provision of data is obligatory based on the provision of the law in the rest of the data is voluntary, refusal to provide data is associated with the inability to carry out the order. Provision of data is a statutory condition.</p>
+                    <li><p id="data-processing-purpose-title">The purposes of processing personal data, and the legal basis for processing</p>
+                        <p id="data-processing-legal-basis">Personal data processed on the basis of Article 6(1)(b), (c) - execution and settlement of the contract, issuance of invoices, realization of complaints, and Article 6(1)(f) of the GDPR legal interest of recovery and security of claims.</p>
+                    </li>
+                    <li><p id="data-recipients-title1">Information on recipients of personal data or categories of recipients</p></li>
+                    <p id="data-recipients-info">Personal data are made available to entities authorized by law, entities with which contracts are signed for entrustment of personal data processing, and other entities in accordance with § 5 Recipients of data.</p>
+                    <li><p id="data-processing-time-title">Period of processing of personal data</p></li>
+                    <p id="data-processing-time-desc">The data will be processed for the duration of the contract for the transaction, until it is settled, as well as for the period of the statute of limitations for claims, if the processing of such data.</p>
+                    
+                    <li><p id="your-rights-title">Your rights</p></li>
+                    <p id="rights-access">You have the right to access your data, the right to rectification of personal data, the right to erasure of data—after archiving deadlines, restriction of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
+                    <li><p id="obligation-to-provide-data-title">Information about the obligation to provide data and the consequences of not providing them</p></li>
+                    <p id="data-provision-obligation">Provision of data is obligatory based on the provision of the law in the rest of the data is voluntary, refusal to provide data is associated with the inability to carry out the order. Provision of data is a statutory condition.</p>
                 </ol>
 
-                <li><p><u>Participation in competitions</u></p></li>
+                <li><p><u id="participation-in-competitions-title">Participation in competitions</u></p></li>
                 <ol type="a">
-                    <li><p>Purposes of personal data processing, and legal basis for processing</p></li>
-                    <p>Personal data is processed in the context of participation in a contest on the basis of Article 6(1)(a) of the GDPR and Article 6(1)(c) of the GDPR.</p>
-                    <li><p>Information on recipients of personal data or categories of recipients</p></li>
-                    <p>Personal data shall be made available to entities authorized by law, entities with which personal data processing entrustment agreements are signed, and other entities in accordance with § 5 Recipients of data.</p>
-                    <li><p>Period for which personal data will be stored</p></li>
-                    <p>Personal data shall be processed until the competition is held, while observing the archiving deadlines under separate regulations.</p>
-                    <li><p>Rights in force</p></li>
-                    <p>You have the right to withdraw consent, the right to access your data, the right to rectify personal data, the right to delete data—after archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
-                    <li><p>Information on the obligation to provide data and the consequence of not providing them</p></li>
-                    <p>Provision of data is voluntary, refusal to provide data entails the inability to participate in the competition.</p>
+                    <li><p id="competition-data-processing-title">Purposes of personal data processing, and legal basis for processing</p></li>
+                    <p id="competition-legal-basis">Personal data is processed in the context of participation in a contest on the basis of Article 6(1)(a) of the GDPR and Article 6(1)(c) of the GDPR.</p>
+                    <li><p id="competition-recipients-title">Information on recipients of personal data or categories of recipients</p></li>
+                    <p id="competition-recipients-info">Personal data shall be made available to entities authorized by law, entities with which personal data processing entrustment agreements are signed, and other entities in accordance with § 5 Recipients of data.</p>
+                    <li><p id="data-storage-period-title">Period for which personal data will be stored</p></li>
+                    <p id="data-storage-period-info">Personal data shall be processed until the competition is held, while observing the archiving deadlines under separate regulations.</p>
+                    <li><p id="competition-rights-title">Rights in force</p></li>
+                    <p id="competition-rights-info">You have the right to withdraw consent, the right to access your data, the right to rectify personal data, the right to delete data—after archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
+                    <li><p id="competition-data-provision-title">Information on the obligation to provide data and the consequence of not providing them</p></li>
+                    <p id="competition-data-provision-info">Provision of data is voluntary, refusal to provide data entails the inability to participate in the competition.</p>
                 </ol>
-
-                <li><p><u>Sending newsletters</u></p></li>
+                
+                <li><p><u id="sending-newsletters-title">Sending newsletters</u></p></li>
                 <ol type="a">
-                    <li><p>Purposes of personal data processing, and legal basis for processing</p></li>
-                    <p>The data is processed in accordance with Article 6(1)(a) of the GDPR for the purpose of carrying out the ordered Newsletter service, provided electronically on the basis of the consent given.</p>
-                    <li><p>Information on recipients of personal data or categories of recipients</p></li>
-                    <p>Personal data shall be made available to entities authorized by law, entities with which personal data processing entrustment agreements are signed, and other entities in accordance with § 5 Recipients of data.</p>
-                    <li><p>Period for which personal data will be stored</p></li>
-                    <p>The Administrator will process personal data until the subscriber cancels the Newsletter service.</p>
-                    <li><p>Rights in force</p></li>
-                    <p>You have the right to withdraw your consent, the right to access your data, the right to rectify your personal data, the right to delete your data—after the archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
-                    <li><p>Information on the obligation to provide data and the consequence of not providing them</p></li>
-                    <p>Provision of data is voluntary, refusal to provide data entails the inability to receive the newsletter.</p>
+                    <li><p id="newsletter-data-processing-title">Purposes of personal data processing, and legal basis for processing</p></li>
+                    <p id="newsletter-legal-basis">The data is processed in accordance with Article 6(1)(a) of the GDPR for the purpose of carrying out the ordered Newsletter service, provided electronically on the basis of the consent given.</p>
+                    <li><p id="newsletter-data-recipients-title">Information on recipients of personal data or categories of recipients</p></li>
+                    <p id="newsletter-data-recipients-info">Personal data shall be made available to entities authorized by law, entities with which personal data processing entrustment agreements are signed, and other entities in accordance with § 5 Recipients of data.</p>
+                    <li><p id="newsletter-data-storage-period-title">Period for which personal data will be stored</p></li>
+                    <p id="newsletter-data-storage-period-info">The Administrator will process personal data until the subscriber cancels the Newsletter service.</p>
+                    <li><p id="newsletter-rights-title">Rights in force</p></li>
+                    <p id="newsletter-rights-info">You have the right to withdraw your consent, the right to access your data, the right to rectify your personal data, the right to delete your data—after the archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
+                    <li><p id="newsletter-data-provision-title">Information on the obligation to provide data and the consequence of not providing them</p></li>
+                    <p id="newsletter-data-provision-info">Provision of data is voluntary, refusal to provide data entails the inability to receive the newsletter.</p>
                 </ol>
-
-                <li><p><u>Data processing for marketing purposes</u></p></li>
+                <!-- Data Processing for Marketing Purposes -->
+                <li><p><u id="marketing-data-processing-title">Data processing for marketing purposes</u></p></li>
                 <ol type="a">
-                    <li><p>Purposes of personal data processing, and legal basis for processing</p></li>
-                    <p>Personal data will be processed for marketing purposes on the basis of expressed consent pursuant to Article 6(1)(a) of the GDPR, with reference to the provisions of Article 172 and Article 10 of the Act of July 18, 2002 on the provision of electronic services, respectively</p>
-                    <li><p>Information on recipients of personal data or categories of recipients</p></li>
-                    <p>Personal data shall be made available to entities authorized by law, entities with which personal data processing entrustment agreements are signed, and other entities in accordance with § 5 Recipients of data.</p>
-                    <li><p>Period for which personal data will be stored</p></li>
-                    <p>Personal data will be processed until you withdraw your consent to data processing.</p>
-                    <li><p>Rights in force</p></li>
-                    <p>You have the right to withdraw your consent, the right to access your data, the right to rectify your personal data, the right to delete your data—after the archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
-                    <li><p>Information on the obligation to provide data and the consequence of not providing them</p></li>
-                    <p>Provision of data is voluntary, lack of consent will prevent sending information for marketing purposes.</p>
+                    <li><p id="marketing-purpose">Purposes of personal data processing, and legal basis for processing</p></li>
+                    <p id="marketing-purpose-desc">Personal data will be processed for marketing purposes on the basis of expressed consent pursuant to Article 6(1)(a) of the GDPR, with reference to the provisions of Article 172 and Article 10 of the Act of July 18, 2002 on the provision of electronic services, respectively</p>
+                    <li><p id="marketing-recipients">Information on recipients of personal data or categories of recipients</p></li>
+                    <p id="marketing-recipients-desc">Personal data shall be made available to entities authorized by law, entities with which personal data processing entrustment agreements are signed, and other entities in accordance with § 5 Recipients of data.</p>
+                    <li><p id="marketing-storage">Period for which personal data will be stored</p></li>
+                    <p id="marketing-storage-desc">Personal data will be processed until you withdraw your consent to data processing.</p>
+                    <li><p id="marketing-rights">Rights in force</p></li>
+                    <p id="marketing-rights-desc">You have the right to withdraw your consent, the right to access your data, the right to rectify your personal data, the right to delete your data—after the archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
+                    <li><p id="marketing-obligation">Information on the obligation to provide data and the consequence of not providing them</p></li>
+                    <p id="marketing-obligation-desc">Provision of data is voluntary, lack of consent will prevent sending information for marketing purposes.</p>
                 </ol>
-
-                <li><p><u>Contact form and chat</u></p></li>
+                <!-- Contact Form and Chat -->
+                <li><p><u id="contact-form-chat-title">Contact form and chat</u></p></li>
                 <ol type="a">
-                    <li><p>Purposes of personal data processing, and legal basis for processing</p></li>
-                    <p>Personal data is processed for the purpose of handling correspondence, including providing feedback. The basis for processing is Article 6(1)(f) of the GDPR (legitimate interest: to be able to answer your question and provide feedback).</p>
-                    <li><p>Information on recipients of personal data or categories of recipients</p></li>
-                    <p>Personal data is made available to entities authorized by law, entities with which contracts are signed for the entrustment of personal data processing, and other entities in accordance with § 5 Recipients of data.</p>
-                    <li><p>Period for which personal data will be stored</p></li>
-                    <p>Personal data will be processed for the period of correspondence and for the period required by archiving regulations.</p>
-                    <li><p>Your rights</p></li>
-                    <p>You have the right to access your data, the right to rectification of personal data, the right to erasure of data—after the archiving deadlines, restriction of processing, the right to data portability Details of the rules for exercising the rights of data subjects are set forth in § 2 Rights.</p>
-                    <li><p>Information on the obligation to provide data and the consequence of not providing them</p></li>
-                    <p>Provision of data is required to the extent necessary to receive an answer to the question asked or to solve any problems.</p>
+                    <li><p id="contact-purpose">Purposes of personal data processing, and legal basis for processing</p></li>
+                    <p id="contact-purpose-desc">Personal data is processed for the purpose of handling correspondence, including providing feedback. The basis for processing is Article 6(1)(f) of the GDPR (legitimate interest: to be able to answer your question and provide feedback).</p>
+                    <li><p id="contact-recipients">Information on recipients of personal data or categories of recipients</p></li>
+                    <p id="contact-recipients-desc">Personal data is made available to entities authorized by law, entities with which contracts are signed for the entrustment of personal data processing, and other entities in accordance with § 5 Recipients of data.</p>
+                    <li><p id="contact-storage">Period for which personal data will be stored</p></li>
+                    <p id="contact-storage-desc">Personal data will be processed for the period of correspondence and for the period required by archiving regulations.</p>
+                    <li><p id="contact-rights"> Your rights</p></li>
+                    <p id="contact-rights-desc">You have the right to access your data, the right to rectification of personal data, the right to erasure of data—after the archiving deadlines, restriction of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 Rights.</p>
+                    <li><p id="contact-obligation">Information on the obligation to provide data and the consequence of not providing them</p></li>
+                    <p id="contact-obligation-desc">Provision of data is required to the extent necessary to receive an answer to the question asked or to solve any problems.</p>
                 </ol>
-
-                <li><p><u>Email contact</u></p></li>
+                <li><p><u id="email-contact-title">Email contact</u></p></li>
                 <ol type="a">
-                    <li><p>Purposes of personal data processing, and legal basis for processing</p></li>
-                    <p>Personal data is processed for the purpose of handling correspondence, including providing feedback. The basis for processing is Article 6(1)(f) of the GDPR (legitimate interest: to be able to answer your question and provide feedback).</p>
-                    <li><p>Information on recipients of personal data or categories of recipients</p></li>
-                    <p>Personal data are made available to entities authorized by law, entities with which contracts are signed for the entrustment of personal data processing, and other entities in accordance with § 5 Recipients of data.</p>
-                    <li><p>Period for which personal data will be stored</p></li>
-                    <p>Personal data will be processed for the period of correspondence and for the period required by archiving regulations.</p>
-                    <li><p>Your rights</p></li>
-                    <p>You have the right to withdraw your consent, the right to access your data, the right to rectify personal data, the right to delete data—after the archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
-                    <li><p>Information on the obligation to provide data and the consequence of not providing them</p></li>
-                    <p>Provision of data is required to the extent necessary to receive an answer to the question asked or to solve any problems (e-mail address).</p>
-                </ol>
-            </ol>
-
-            <h4>§ 5</h4>
-            <p><b>Recipients of data</b></p>
-            <p>Bodega Sur, headquartered in Krakow, shares your personal data only with such entities and organizations that protect them and act in accordance with applicable data protection laws. Your data may be transferred to the following recipients:</p>
-            <ol>
-                <li><p>Separate data controllers or co-controllers:</p></li>
-                <ol type="a">
-                    <li><p>Postal operators, couriers and suppliers, in case it is necessary for the delivery to you;</p></li>
-                    <li><p>Entities performing consulting, auditing activities;</p></li>
-                    <li><p>Entities handling electronic payments or payment cards to the extent necessary to handle the payment made by the customer, as well as to handle the possible return of the amounts paid (when you withdraw from the purchase contract). In particular, we provide information on the amount of payment to the selected payment service provider;</p></li>
-                    <li><p>Entities or institutions authorized to obtain them under applicable law, e.g. law enforcement agencies in the event they issue a request for access to data, on an appropriate legal basis (e.g. for the purposes of ongoing criminal proceedings).</p></li>
-                </ol>
-
-                <li><p>Processors:</p></li>
-                <ol type="a">
-                    <li><p>specialized service providers in the Internet marketing sector who process your data (pseudonymized profiles using cookie technology and the like) on our behalf for the purpose of marketing communications in advertising networks;</p></li>
-                    <li><p>to service providers that supply the administrator with technical, IT solutions that enable the operation of the online store and the services provided through it (in particular, computer software providers, email providers and hosting providers);</p></li>
-                    <li><p>Service providers supplying the administrator with logistical solutions;</p></li>
-                    <li><p>other entities, if it results from arrangements with you.</p></li>
+                    <li><p id="email-purpose">Purposes of personal data processing, and legal basis for processing</p></li>
+                    <p id="email-purpose-desc">Personal data is processed for the purpose of handling correspondence, including providing feedback. The basis for processing is Article 6(1)(f) of the GDPR (legitimate interest: to be able to answer your question and provide feedback).</p>
+                    <li><p id="email-recipients">Information on recipients of personal data or categories of recipients</p></li>
+                    <p id="email-recipients-desc">Personal data are made available to entities authorized by law, entities with which contracts are signed for the entrustment of personal data processing, and other entities in accordance with § 5 Recipients of data.</p>
+                    <li><p id="email-storage">Period for which personal data will be stored</p></li>
+                    <p id="email-storage-desc">Personal data will be processed for the period of correspondence and for the period required by archiving regulations.</p>
+                    <li><p id="email-rights">Your rights</p></li>
+                    <p id="email-rights-desc">You have the right to withdraw your consent, the right to access your data, the right to rectify personal data, the right to delete data—after the archiving deadlines, limitation of processing, the right to data portability. Details of the rules for exercising the rights of data subjects are set forth in § 2 The rights to which you are entitled.</p>
+                    <li><p id="email-obligation">Information on the obligation to provide data and the consequence of not providing them</p></li>
+                    <p id="email-obligation-desc">Provision of data is required to the extent necessary to receive an answer to the question asked or to solve any problems (e-mail address).</p>
                 </ol>
             </ol>
             
-            <h4>§ 6</h4>
-            <p><b>Transfers to third countries</b></p>
-            <p>Except as described in the Policy, we do not transfer your personal data to recipients located outside the European Union or the European Economic Area.</p>
-            <p>If we transfer personal data to recipients outside the European Economic Area (EEA), this is only done if an adequate level of data protection has been confirmed for that third country by the European Commission, an adequate level of data protection has been agreed with the recipient (e.g. using EU standard contractual clauses), or if we have obtained your consent.</p>
-              
-            <h4>§ 7</h4>
-            <p><b>Final Provisions</b></p>
-            <p>For our part, we thank you for your trust and we will do our best to keep your data safe and our processing of your data in compliance with applicable laws.</p>
-            <p>This policy is effective as of 10.10.2024. Bodega Sur, based in Krakow reserves the right to make necessary changes and updates to this Policy by publishing new content on our website. After the change, the Policy will appear on the website with the new date.</p>
-              
-            <div class="text-center mt-5">
-                <button type="button" onclick="location.href='index.html'">Back to Home</button>
+            <h4 id="data-recipients-section">§ 5</h4>
+            <h4 id="data-recipients-title">Recipients of data</h4>
+            <p id="data-recipients-intro">Bodega Sur, headquartered in Krakow, shares your personal data only with such entities and organizations that protect them and act in accordance with applicable data protection laws. Your data may be transferred to the following recipients:</p>
+            <ol>
+                <li><p id="data-recipients-controllers">Separate data controllers or co-controllers:</p></li>
+                <ol type="a">
+                    <li><p id="data-recipients-controllers-postal">Postal operators, couriers and suppliers, in case it is necessary for the delivery to you;</p></li>
+                    <li><p id="data-recipients-controllers-consulting">Entities performing consulting, auditing activities;</p></li>
+                    <li><p id="data-recipients-controllers-payments">Entities handling electronic payments or payment cards to the extent necessary to handle the payment made by the customer, as well as to handle the possible return of the amounts paid (when you withdraw from the purchase contract). In particular, we provide information on the amount of payment to the selected payment service provider;</p></li>
+                    <li><p id="data-recipients-controllers-authorized">Entities or institutions authorized to obtain them under applicable law, e.g. law enforcement agencies in the event they issue a request for access to data, on an appropriate legal basis (e.g. for the purposes of ongoing criminal proceedings).</p></li>
+                </ol>
+                <li><p id="data-recipients-processors">Processors:</p></li>
+                <ol type="a">
+                    <li><p id="data-recipients-processors-marketing">specialized service providers in the Internet marketing sector who process your data (pseudonymized profiles using cookie technology and the like) on our behalf for the purpose of marketing communications in advertising networks;</p></li>
+                    <li><p id="data-recipients-processors-it">to service providers that supply the administrator with technical, IT solutions that enable the operation of the online store and the services provided through it (in particular, computer software providers, email providers and hosting providers);</p></li>
+                    <li><p id="data-recipients-processors-logistics">Service providers supplying the administrator with logistical solutions;</p></li>
+                    <li><p id="data-recipients-processors-other">other entities, if it results from arrangements with you.</p></li>
+                </ol>
+            </ol>
+            
+            <h4 id="transfers-section">§ 6</h4>
+            <h4 id="transfers-title"><b>Transfers to third countries</b></h4>
+            <p id="transfers-intro">Except as described in the Policy, we do not transfer your personal data to recipients located outside the European Union or the European Economic Area.</p>
+            <p id="transfers-detail">If we transfer personal data to recipients outside the European Economic Area (EEA), this is only done if an adequate level of data protection has been confirmed for that third country by the European Commission, an adequate level of data protection has been agreed with the recipient (e.g. using EU standard contractual clauses), or if we have obtained your consent.</p>
+            
+            <h4 id="final-provisions-section">§ 7</h4>
+            <h4 id="final-provisions-title"><b>Final Provisions</b></h4>
+            <p id="final-provisions-dude">If you have any questions, objections or concerns about the content of this Policy or the way we process your personal data, or any complaints regarding these issues, please contact us by sending an email to: hola@bodegasur.com.</p>
+            <p id="final-provisions-thankyou">For our part, we thank you for your trust and we will do our best to keep your data safe and our processing of your data in compliance with applicable laws.</p>
+            <p id="final-provisions-effective-date">This policy is effective as of 10.10.2024. Bodega Sur, based in Krakow reserves the right to make necessary changes and updates to this Policy by publishing new content on our website. After the change, the Policy will appear on the website with the new date.</p>
+
+            <div id="back-to-home-container" class="text-center mt-5">
+                <button id="back-to-home-button" type="button" onclick="location.href='index.html'">Back to Home</button>
             </div>
         </div>
-       </body>
+        <script src="js/privacy.js"></script>
+    </body>
     <!-- Footer -->
     <div id="footer-container"></div>
-    <script src="js/footer.js" defer></script>
+    <script src="js/footer.js"></script>
 </html>
