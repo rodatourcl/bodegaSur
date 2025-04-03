@@ -9,7 +9,7 @@ const products = [
             pl: "Naturalne tortille kukurydziane produkowane z kukurydzy nixtamalizowanej"
         },
         priceLocal: 36,
-        priceEu: 8.4,
+        priceEu: 8.6,
         footer: { en: "Package 1 kg", es: "Paquete 1 kg", pl: "Opakowanie 1 kg" },
         images: ["images/13_1.jpg", "images/13_2.png", "images/13_3.png"],
         // Para el detalle del producto
@@ -53,8 +53,8 @@ const products = [
             es: "Tortillas de maíz natural fabricadas con maíz procesado con nixtamalización",
             pl: "Naturalne tortille kukurydziane produkowane z kukurydzy nixtamalizowanej"
         },
-        priceLocal: 34,
-        priceEu: 7.9,
+        priceLocal: 36,
+        priceEu: 8.6,
         footer: { en: "Package 1 kg", es: "Paquete 1 kg", pl: "Opakowanie 1 kg" },
         images: ["images/15_1.png", "images/15_2.png", "images/15_3.png"],
         // Para el detalle del producto
@@ -98,8 +98,8 @@ const products = [
             es: "Tortillas de maíz natural fabricadas con maíz procesado con nixtamalización",
             pl: "Naturalne tortille kukurydziane produkowane z kukurydzy nixtamalizowanej"
         },
-        priceLocal: 20,
-        priceEu: 4.7,
+        priceLocal: 22,
+        priceEu: 5.3,
         footer: { en: "Package 500 gr", es: "Paquete 500 gr", pl: "Opakowanie 500 gr" },
         images: ["images/15_4.png", "images/15_5.png", "images/15_6.png"],
         description: {
@@ -144,7 +144,7 @@ const products = [
             pl: "Naturalne ciasto kukurydziane wytwarzane z nixtamalizowanej kukurydzy"
         },
         priceLocal: 25,
-        priceEu: 5.8,
+        priceEu: 6.0,
         footer: { en: "Package 1 kg", es: "Paquete 1 kg", pl: "Opakowanie 1 kg" },
         images: ["images/masa2.png", "images/masa1.jpeg", "images/masa3.png"],
         // Para el detalle del producto
@@ -230,7 +230,7 @@ const products = [
             pl: "Habanero i mango"
         },
         priceLocal: 37.99,
-        priceEu: 8.76,
+        priceEu: 9.0,
         footer: { en: "Glass bottle 200 ml", es: "Botella de vidrio 200 ml", pl: "Szklana butelka 200 ml" },
         images: ["images/hulaXM.png"],
         // Para el detalle del producto
@@ -271,7 +271,7 @@ const products = [
             pl: "Sos chipotle"
         },
         priceLocal: 37.99,
-        priceEu: 8.76,
+        priceEu: 9.0,
         footer: { en: "Glass bottle 200 ml", es: "Botella de vidrio 200 ml", pl: "Szklana butelka 200 ml" },
         images: ["images/chipotleM.png"],
         // Para el detalle del producto
@@ -316,7 +316,7 @@ const products = [
             pl: "Habanero i pepperoni"
         },
         priceLocal: 34.99,
-        priceEu: 8.1,
+        priceEu: 8.3,
         footer: { en: "Glass bottle 200 ml", es: "Botella de vidrio 200 ml", pl: "Szklana butelka 200 ml" },
         images: ["images/habaneroM.png"],
         // Para el detalle del producto
@@ -360,7 +360,7 @@ const products = [
             pl: "Sos z Naga Jolokia (Ghost Pepper)"
         },
         priceLocal: 42.99,
-        priceEu: 9.9,
+        priceEu: 10.2,
         footer: { en: "Glass bottle: 200 ml", es: "Botella de vidrio 200: ml", pl: "Szklana butelka: 200 ml" },
         images: ["images/yoloM.png"],
         // Para el detalle del producto
