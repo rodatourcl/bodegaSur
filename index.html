@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bodega Sur</title>
+    <title>Bodega Sur | Próximamente</title>
     <!-- Favicon: El logo que aparece en la pestaña del navegador -->
     <link rel="icon" type="image/png" href="img/Logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -117,21 +117,17 @@
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // CONFIGURACIÓN: Introduce aquí los datos de tu consola de Firebase
-       
-        // Your web app's Firebase configuration
+        // CONFIGURACIÓN DE TU CONSOLA
         const firebaseConfig = {
-        apiKey: "AIzaSyCRVpul3NsU25afPGpKN6QZjIhEPoolfDY",
-        authDomain: "bodegasur-d4bcb.firebaseapp.com",
-        projectId: "bodegasur-d4bcb",
-        storageBucket: "bodegasur-d4bcb.firebasestorage.app",
-        messagingSenderId: "429705788900",
-        appId: "1:429705788900:web:b12be264564bc007a4dbf1"
+            apiKey: "AIzaSyCRVpul3NsU25afPGpKN6QZjIhEPoolfDY",
+            authDomain: "bodegasur-d4bcb.firebaseapp.com",
+            projectId: "bodegasur-d4bcb",
+            storageBucket: "bodegasur-d4bcb.firebasestorage.app",
+            messagingSenderId: "429705788900",
+            appId: "1:429705788900:web:b12be264564bc007a4dbf1"
         };
 
-        // Verificación básica para evitar el error de consola si no se han puesto las llaves
-        const isConfigValid = firebaseConfig.apiKey !== "TU_API_KEY";
-
+        const isConfigValid = firebaseConfig.apiKey !== "";
         let db, auth, currentUser = null;
 
         if (isConfigValid) {
@@ -143,7 +139,7 @@
                 try {
                     await signInAnonymously(auth);
                 } catch (error) {
-                    console.error("Error de Auth:", error.message);
+                    console.error("Error de Autenticación:", error.message);
                 }
             };
 
@@ -152,18 +148,16 @@
             });
 
             initAuth();
-        } else {
-            console.warn("Firebase no está configurado. Por favor, introduce tus credenciales en el archivo index.html");
         }
 
         const appId = 'bodega-sur-app'; 
 
         window.saveSubscriber = async (email) => {
-            if (!isConfigValid) {
-                throw new Error("Configuración de Firebase incompleta");
-            }
+            if (!isConfigValid) throw new Error("Firebase no configurado");
+            
+            // Re-intentar auth anónima si no existe sesión activa
             if (!currentUser) {
-                try { await signInAnonymously(auth); } catch(e) {}
+                try { currentUser = (await signInAnonymously(auth)).user; } catch(e) {}
             }
             
             const collectionPath = `artifacts/${appId}/public/data/subscribers`;
@@ -175,7 +169,7 @@
         };
     </script>
 
-    <!-- TRADUCCIONES Y UI -->
+    <!-- TRADUCCIONES Y CONTROLADOR UI -->
     <script>
         const translations = {
             es: {
@@ -189,12 +183,12 @@
                 formDesc: "Déjanos tu correo y serás el primero en saber cuándo volvemos a abrir.",
                 inputPlaceholder: "Tu correo electrónico",
                 btnSubmit: "Avísenme",
-                error: "Hubo un error (Verifica la configuración de Firebase).",
+                error: "Hubo un error al guardar. Inténtalo más tarde.",
                 success: "¡Gracias! Te avisaremos pronto.",
                 footer: "Hecho con pasión por el sabor."
             },
             en: {
-                title: "We are improving!",
+                title: "We are Improving!",
                 subtitle: "Our kitchen is undergoing renovation. We will be back soon with the best corn tortillas and our artisanal salsas for you to enjoy the authentic flavor of Bodega Sur.",
                 prod1Title: "Corn Tortillas",
                 prod1Desc: "Nixtamalized and fresh, made with traditional processes.",
@@ -204,7 +198,7 @@
                 formDesc: "Leave us your email and be the first to know when we reopen.",
                 inputPlaceholder: "Your email address",
                 btnSubmit: "Notify me",
-                error: "Something went wrong (Check Firebase config).",
+                error: "Error saving your email. Please try again.",
                 success: "Thanks! We'll let you know soon.",
                 footer: "Made with passion for flavor."
             },
@@ -216,10 +210,10 @@
                 prod2Title: "Nasze Sosy",
                 prod2Desc: "Ekskluzywne receptury Bodega Sur z wyselekcionowanych składników.",
                 formTitle: "Chcesz powiadomienie?",
-                formDesc: "Zostaw swój e-mail i dowiedz się pierwszy, kiedy ponownie się otworzymy.",
+                formDesc: "Zostaw swój e-mail i dowiedz się pierwszy, kiedy ponownie otworzymy.",
                 inputPlaceholder: "Twój adres e-mail",
                 btnSubmit: "Powiadom mnie",
-                error: "Coś poszło nie tak (Sprawdź konfigurację Firebase).",
+                error: "Wystąpił błąd. Spróbuj ponownie później.",
                 success: "Dziękujemy! Poinformujemy Cię wkrótce.",
                 footer: "Stworzone z pasji do smaku."
             }
@@ -253,17 +247,12 @@
             const errorMsg = document.getElementById('error-msg');
             const successMsg = document.getElementById('success-msg');
             
-            const email = emailInput.value;
-            
-            if(email) {
+            if(emailInput.value) {
                 try {
                     submitBtn.disabled = true;
                     errorMsg.classList.add('hidden');
-                    
-                    await window.saveSubscriber(email);
-                    
+                    await window.saveSubscriber(emailInput.value);
                     document.getElementById('notify-form').classList.add('hidden');
-                    successMsg.querySelector('p').innerText = translations[window.currentLang || 'es'].success;
                     successMsg.classList.remove('hidden');
                 } catch (error) {
                     console.error("Fallo al guardar", error);
