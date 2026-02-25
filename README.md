@@ -42,7 +42,9 @@ Reemplaza los valores en el archivo index.html (líneas 106-113).
 📝 Implementation Notes / Notas de Implementación
 Favicon: The browser tab icon is pulled from img/Logo.png. / El icono de la pestaña se carga desde img/Logo.png.
 Firestore Rules: Ensure your security rules allow writing to the path /artifacts/bodega-sur-app/public/data/subscribers. / Asegúrate de que las reglas de seguridad permitan escribir en la ruta mencionada.
+
 🌐 Deployment / Despliegue
 This site is ready to be hosted on GitHub Pages. Simply upload the files to a repository and enable "Pages" in the settings.
 Este sitio está listo para ser alojado en GitHub Pages. Simplemente sube los archivos a un repositorio y activa "Pages" en la configuración.
+
 Made with passion for flavor - Bodega Sur. Hecho con pasión por el sabor - Bodega Sur.
