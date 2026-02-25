@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bodega Sur</title>
+    <!-- Favicon: El logo que aparece en la pestaña del navegador -->
+    <link rel="icon" type="image/png" href="img/Logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-color: #CB6040;
+            --brand-dark: #b04f33;
+            --bg-crema: #fffaf0;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-crema);
+        }
+        h1, h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-pattern {
+            background-color: var(--bg-crema);
+            background-image: url("https://www.transparenttextures.com/patterns/pinstripe.png");
+        }
+        .lang-btn.active {
+            background-color: var(--brand-color);
+            color: white;
+            border-color: var(--brand-color);
+        }
+        .bg-brand { background-color: var(--brand-color); }
+        .text-brand { color: var(--brand-color); }
+        .border-brand { border-color: var(--brand-color); }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="hero-pattern min-h-screen flex flex-col items-center">
+
+    <!-- Header / Selector de Idioma -->
+    <header class="w-full max-w-5xl p-6 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <img src="img/Logo.png" alt="Logotipo de Bodega Sur" class="h-12 w-12 object-contain rounded-full shadow-sm">
+            <div class="text-xl md:text-2xl font-bold text-brand uppercase tracking-wider">Bodega Sur</div>
+        </div>
+        <div class="flex gap-2">
+            <button onclick="setLanguage('es')" id="btn-es" class="lang-btn active px-3 py-1 rounded-full border border-gray-300 text-xs md:text-sm transition-all hover:border-brand">ES</button>
+            <button onclick="setLanguage('en')" id="btn-en" class="lang-btn px-3 py-1 rounded-full border border-gray-300 text-xs md:text-sm transition-all hover:border-brand">EN</button>
+            <button onclick="setLanguage('pl')" id="btn-pl" class="lang-btn px-3 py-1 rounded-full border border-gray-300 text-xs md:text-sm transition-all hover:border-brand">PL</button>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-grow flex flex-col items-center justify-center text-center px-4 max-w-3xl fade-in py-8">
+        <div class="mb-8 relative">
+            <div class="w-48 h-48 md:w-56 md:h-56 mx-auto mb-6 transition-transform hover:scale-105">
+                <img src="img/Logo.png" alt="Logotipo principal Bodega Sur" class="w-full h-full object-contain">
+            </div>
+            
+            <h1 id="main-title" class="text-4xl md:text-6xl font-bold text-gray-900 mb-4 leading-tight">¡Estamos mejorando!</h1>
+            <p id="main-subtitle" class="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed">
+                Nuestra cocina se está renovando. Pronto volveremos con las mejores tortillas de maíz y nuestras salsas artesanales para que disfrutes del auténtico sabor de Bodega Sur.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16 w-full">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-brand group">
+                <div class="text-4xl mb-4 transition-transform group-hover:scale-110">🟡</div>
+                <h3 id="prod-1-title" class="font-bold text-gray-800 text-xl mb-3">Tortillas de Maíz</h3>
+                <p id="prod-1-desc" class="text-sm text-gray-500">Nixtamalizadas y frescas, elaboradas con procesos tradicionales.</p>
+            </div>
+            <div class="bg-white p-8 rounded-2xl shadow-sm border-t-4 border-brand group">
+                <div class="text-4xl mb-4 transition-transform group-hover:scale-110">🌶️</div>
+                <h3 id="prod-2-title" class="font-bold text-gray-800 text-xl mb-3">Nuestras Salsas</h3>
+                <p id="prod-2-desc" class="text-sm text-gray-500">Recetas exclusivas de Bodega Sur con ingredientes seleccionados.</p>
+            </div>
+        </div>
+
+        <!-- Formulario de Suscripción -->
+        <div class="bg-brand text-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl w-full max-w-md relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full"></div>
+            
+            <div class="relative z-10">
+                <h2 id="form-title" class="text-2xl md:text-3xl font-bold mb-3">¿Quieres que te avisemos?</h2>
+                <p id="form-desc" class="opacity-90 text-sm md:text-base mb-8">Déjanos tu correo y serás el primero en saber cuándo volvemos a abrir.</p>
+                
+                <form id="notify-form" class="flex flex-col gap-4">
+                    <input type="email" id="input-email" required placeholder="Tu correo electrónico" class="px-5 py-4 rounded-2xl text-gray-900 focus:outline-none focus:ring-4 focus:ring-white/30 border-none shadow-inner">
+                    <button type="submit" id="btn-submit" class="bg-white text-brand font-black text-lg py-4 rounded-2xl transition-all hover:bg-gray-100 hover:shadow-lg active:scale-95 disabled:opacity-50">
+                        Avísenme
+                    </button>
+                </form>
+                <div id="success-msg" class="hidden mt-6 bg-white/20 p-4 rounded-xl backdrop-blur-sm">
+                    <p class="font-bold italic">¡Gracias! Te avisaremos pronto.</p>
+                </div>
+                <p id="error-msg" class="hidden mt-4 text-white text-sm bg-red-500/30 p-2 rounded-lg italic">Hubo un error. Inténtalo de nuevo.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full p-10 text-center text-gray-500 text-sm mt-auto">
+        <p>&copy; 2024 Bodega Sur. <br class="md:hidden"> <span id="footer-text">Hecho con pasión por el sabor.</span></p>
+    </footer>
+
+    <!-- LÓGICA DE FIREBASE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // CONFIGURACIÓN: Introduce aquí los datos de tu consola de Firebase
+       
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyCRVpul3NsU25afPGpKN6QZjIhEPoolfDY",
+        authDomain: "bodegasur-d4bcb.firebaseapp.com",
+        projectId: "bodegasur-d4bcb",
+        storageBucket: "bodegasur-d4bcb.firebasestorage.app",
+        messagingSenderId: "429705788900",
+        appId: "1:429705788900:web:b12be264564bc007a4dbf1"
+        };
+
+        // Verificación básica para evitar el error de consola si no se han puesto las llaves
+        const isConfigValid = firebaseConfig.apiKey !== "TU_API_KEY";
+
+        let db, auth, currentUser = null;
+
+        if (isConfigValid) {
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+
+            const initAuth = async () => {
+                try {
+                    await signInAnonymously(auth);
+                } catch (error) {
+                    console.error("Error de Auth:", error.message);
+                }
+            };
+
+            onAuthStateChanged(auth, (user) => {
+                currentUser = user;
+            });
+
+            initAuth();
+        } else {
+            console.warn("Firebase no está configurado. Por favor, introduce tus credenciales en el archivo index.html");
+        }
+
+        const appId = 'bodega-sur-app'; 
+
+        window.saveSubscriber = async (email) => {
+            if (!isConfigValid) {
+                throw new Error("Configuración de Firebase incompleta");
+            }
+            if (!currentUser) {
+                try { await signInAnonymously(auth); } catch(e) {}
+            }
+            
+            const collectionPath = `artifacts/${appId}/public/data/subscribers`;
+            await addDoc(collection(db, collectionPath), {
+                email: email,
+                language: window.currentLang || 'es',
+                timestamp: serverTimestamp()
+            });
+        };
+    </script>
+
+    <!-- TRADUCCIONES Y UI -->
+    <script>
+        const translations = {
+            es: {
+                title: "¡Estamos mejorando!",
+                subtitle: "Nuestra cocina se está renovando. Pronto volveremos con las mejores tortillas de maíz y nuestras salsas artesanales para que disfrutes del auténtico sabor de Bodega Sur.",
+                prod1Title: "Tortillas de Maíz",
+                prod1Desc: "Nixtamalizadas y frescas, elaboradas con procesos tradicionales.",
+                prod2Title: "Nuestras Salsas",
+                prod2Desc: "Recetas exclusivas de Bodega Sur con ingredientes seleccionados.",
+                formTitle: "¿Quieres que te avisemos?",
+                formDesc: "Déjanos tu correo y serás el primero en saber cuándo volvemos a abrir.",
+                inputPlaceholder: "Tu correo electrónico",
+                btnSubmit: "Avísenme",
+                error: "Hubo un error (Verifica la configuración de Firebase).",
+                success: "¡Gracias! Te avisaremos pronto.",
+                footer: "Hecho con pasión por el sabor."
+            },
+            en: {
+                title: "We are improving!",
+                subtitle: "Our kitchen is undergoing renovation. We will be back soon with the best corn tortillas and our artisanal salsas for you to enjoy the authentic flavor of Bodega Sur.",
+                prod1Title: "Corn Tortillas",
+                prod1Desc: "Nixtamalized and fresh, made with traditional processes.",
+                prod2Title: "Our Salsas",
+                prod2Desc: "Exclusive Bodega Sur recipes with selected ingredients.",
+                formTitle: "Want us to notify you?",
+                formDesc: "Leave us your email and be the first to know when we reopen.",
+                inputPlaceholder: "Your email address",
+                btnSubmit: "Notify me",
+                error: "Something went wrong (Check Firebase config).",
+                success: "Thanks! We'll let you know soon.",
+                footer: "Made with passion for flavor."
+            },
+            pl: {
+                title: "Doskonalimy się!",
+                subtitle: "Nasza kuchnia przechodzi renowację. Wkrótce wrócimy z najlepszymi tortillami kukurydzianymi i naszymi rzemieślniczymi sosami, abyś mógł cieszyć się autentycznym smakiem Bodega Sur.",
+                prod1Title: "Tortille Kukurydziane",
+                prod1Desc: "Nixtamalizowane i świeże, wykonane tradycyjnymi metodami.",
+                prod2Title: "Nasze Sosy",
+                prod2Desc: "Ekskluzywne receptury Bodega Sur z wyselekcionowanych składników.",
+                formTitle: "Chcesz powiadomienie?",
+                formDesc: "Zostaw swój e-mail i dowiedz się pierwszy, kiedy ponownie się otworzymy.",
+                inputPlaceholder: "Twój adres e-mail",
+                btnSubmit: "Powiadom mnie",
+                error: "Coś poszło nie tak (Sprawdź konfigurację Firebase).",
+                success: "Dziękujemy! Poinformujemy Cię wkrótce.",
+                footer: "Stworzone z pasji do smaku."
+            }
+        };
+
+        function setLanguage(lang) {
+            const t = translations[lang];
+            window.currentLang = lang;
+
+            document.getElementById('main-title').innerText = t.title;
+            document.getElementById('main-subtitle').innerText = t.subtitle;
+            document.getElementById('prod-1-title').innerText = t.prod1Title;
+            document.getElementById('prod-1-desc').innerText = t.prod1Desc;
+            document.getElementById('prod-2-title').innerText = t.prod2Title;
+            document.getElementById('prod-2-desc').innerText = t.prod2Desc;
+            document.getElementById('form-title').innerText = t.formTitle;
+            document.getElementById('form-desc').innerText = t.formDesc;
+            document.getElementById('input-email').placeholder = t.inputPlaceholder;
+            document.getElementById('btn-submit').innerText = t.btnSubmit;
+            document.getElementById('footer-text').innerText = t.footer;
+            document.getElementById('error-msg').innerText = t.error;
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+        }
+
+        document.getElementById('notify-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('input-email');
+            const submitBtn = document.getElementById('btn-submit');
+            const errorMsg = document.getElementById('error-msg');
+            const successMsg = document.getElementById('success-msg');
+            
+            const email = emailInput.value;
+            
+            if(email) {
+                try {
+                    submitBtn.disabled = true;
+                    errorMsg.classList.add('hidden');
+                    
+                    await window.saveSubscriber(email);
+                    
+                    document.getElementById('notify-form').classList.add('hidden');
+                    successMsg.querySelector('p').innerText = translations[window.currentLang || 'es'].success;
+                    successMsg.classList.remove('hidden');
+                } catch (error) {
+                    console.error("Fallo al guardar", error);
+                    submitBtn.disabled = false;
+                    errorMsg.classList.remove('hidden');
+                }
+            }
+        });
+
+        setLanguage('es');
+    </script>
+</body>
+</html>
