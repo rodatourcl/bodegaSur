@@ -99,7 +99,6 @@
                     </button>
                 </form>
                 <div id="success-msg" class="hidden mt-6 bg-white/20 p-4 rounded-xl backdrop-blur-sm">
-                    <!-- El texto de aquí se llenará dinámicamente mediante JS -->
                     <p id="success-text" class="font-bold italic"></p>
                 </div>
                 <p id="error-msg" class="hidden mt-4 text-white text-sm bg-red-500/30 p-2 rounded-lg italic">Hubo un error. Inténtalo de nuevo.</p>
@@ -117,7 +116,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getAnalytics, logEvent } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
+        import { getAnalytics, logEvent, isSupported } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-analytics.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCRVpul3NsU25afPGpKN6QZjIhEPoolfDY",
@@ -125,31 +124,47 @@
             projectId: "bodegasur-d4bcb",
             storageBucket: "bodegasur-d4bcb.firebasestorage.app",
             messagingSenderId: "429705788900",
-            appId: "1:429705788900:web:b12be264564bc007a4dbf1"
+            appId: "1:429705788900:web:b12be264564bc007a4dbf1",
+            measurementId: "G-306S529PWS" 
         };
 
         const isConfigValid = firebaseConfig.apiKey !== "";
-        let db, auth, analytics, currentUser = null;
+        let db, auth, analytics = null, currentUser = null;
 
         if (isConfigValid) {
-            const app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            analytics = getAnalytics(app);
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+                
+                // Verificación de soporte y manejo de errores para Analytics (evita el bloqueo por referer)
+                isSupported().then(supported => {
+                    if (supported) {
+                        try {
+                            analytics = getAnalytics(app);
+                        } catch (analyticsErr) {
+                            console.warn("Analytics bloqueado por restricciones de dominio (Referer).");
+                        }
+                    }
+                });
 
-            const initAuth = async () => {
-                try {
-                    await signInAnonymously(auth);
-                } catch (error) {
-                    console.error("Error de Autenticación:", error.message);
-                }
-            };
+                const initAuth = async () => {
+                    try {
+                        await signInAnonymously(auth);
+                    } catch (error) {
+                        // El error 403 aquí confirma que la API Key está restringida por dominio en Google Cloud Console
+                        console.error("Error de Autenticación (Referer Blocked):", error.message);
+                    }
+                };
 
-            onAuthStateChanged(auth, (user) => {
-                currentUser = user;
-            });
+                onAuthStateChanged(auth, (user) => {
+                    currentUser = user;
+                });
 
-            initAuth();
+                initAuth();
+            } catch (initErr) {
+                console.error("Error crítico de inicialización:", initErr);
+            }
         }
 
         const appId = 'bodega-sur-app'; 
@@ -157,10 +172,19 @@
         window.saveSubscriber = async (email) => {
             if (!isConfigValid) throw new Error("Firebase no configurado");
             
-            if (!currentUser) {
-                try { currentUser = (await signInAnonymously(auth)).user; } catch(e) {}
+            // Reintento de sesión anónima si no existe el usuario (por si el bloqueo fue temporal)
+            if (!currentUser && auth) {
+                try { 
+                    const cred = await signInAnonymously(auth);
+                    currentUser = cred.user; 
+                } catch(e) {
+                    console.warn("No se pudo autenticar para guardar datos.");
+                }
             }
             
+            // Si después del reintento no hay usuario, lanzamos error descriptivo
+            if (!currentUser) throw new Error("Permisos denegados por restricciones de dominio en Firebase.");
+
             const collectionPath = `artifacts/${appId}/public/data/subscribers`;
             await addDoc(collection(db, collectionPath), {
                 email: email,
@@ -169,16 +193,20 @@
             });
 
             if (analytics) {
-                logEvent(analytics, 'generate_lead', {
-                    method: 'landing_page_form',
-                    language: window.currentLang || 'es'
-                });
+                try {
+                    logEvent(analytics, 'generate_lead', {
+                        method: 'landing_page_form',
+                        language: window.currentLang || 'es'
+                    });
+                } catch (e) {}
             }
         };
 
         window.logLanguageChange = (lang) => {
             if (analytics) {
-                logEvent(analytics, 'change_language', { language: lang });
+                try {
+                    logEvent(analytics, 'change_language', { language: lang });
+                } catch (e) {}
             }
         }
     </script>
@@ -197,7 +225,7 @@
                 formDesc: "Déjanos tu correo y serás el primero en saber cuándo volvemos a abrir.",
                 inputPlaceholder: "Tu correo electrónico",
                 btnSubmit: "Avísenme",
-                error: "Hubo un error al guardar. Inténtalo más tarde.",
+                error: "Error de permisos. Verifica las restricciones de dominio en Firebase Console.",
                 success: "¡Gracias! Te avisaremos pronto.",
                 footer: "Hecho con pasión por el sabor."
             },
@@ -212,7 +240,7 @@
                 formDesc: "Leave us your email and be the first to know when we reopen.",
                 inputPlaceholder: "Your email address",
                 btnSubmit: "Notify me",
-                error: "Error saving your email. Please try again.",
+                error: "Permission error. Check domain restrictions in Firebase Console.",
                 success: "Thanks! We'll let you know soon.",
                 footer: "Made with passion for flavor."
             },
@@ -227,7 +255,7 @@
                 formDesc: "Zostaw swój e-mail i dowiedz się pierwszy, kiedy ponownie się otworzymy.",
                 inputPlaceholder: "Twój adres e-mail",
                 btnSubmit: "Powiadom mnie",
-                error: "Wystąpił błąd. Spróbuj ponownie później.",
+                error: "Błąd uprawnień. Sprawdź ograniczenia domeny en Firebase Console.",
                 success: "Dziękujemy! Poinformujemy Cię wkrótce.",
                 footer: "Stworzone z pasji do smaku."
             }
@@ -249,8 +277,6 @@
             document.getElementById('btn-submit').innerText = t.btnSubmit;
             document.getElementById('footer-text').innerText = t.footer;
             document.getElementById('error-msg').innerText = t.error;
-            
-            // ACTUALIZACIÓN: Ahora también traducimos el mensaje de éxito
             document.getElementById('success-text').innerText = t.success;
             
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
